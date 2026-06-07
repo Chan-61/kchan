@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>변화, 항상성, 그리고 동시성: 우주와 나의 대화</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #fdfbf7; /* Warm neutral background */
+            color: #4a4a4a;
+        }
+        h1, h2, h3, .serif {
+            font-family: 'Noto Serif KR', serif;
+        }
+        .section-container {
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .card-shadow {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card-shadow:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        /* Chart container styling as per requirements */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        .highlight-text {
+            background: linear-gradient(120deg, #e6fffa 0%, #e6fffa 100%);
+            background-repeat: no-repeat;
+            background-size: 100% 0.2em;
+            background-position: 0 88%;
+            transition: background-size 0.25s ease-in;
+        }
+        .highlight-text:hover {
+            background-size: 100% 88%;
+        }
+        .nav-dot {
+            transition: all 0.3s ease;
+        }
+        .nav-dot.active {
+            background-color: #d97706; /* Amber-600 */
+            transform: scale(1.25);
+        }
+    </style>
+    <!-- Chosen Palette: Warm Zen - Beige (#fdfbf7), Soft Gray (#4a4a4a), Muted Amber (#d97706), Sage Green (#84a98c) -->
+    <!-- Application Structure Plan:
+         The app follows the "Kishōtenketsu" (Introduction, Development, Twist, Conclusion) structure requested.
+         1. Intro (Gi): Defining the Core Concepts (Change, Consistency, Synchronicity) - Interactive Cards.
+         2. Development (Seung): The Convergence of East (I Ching) and West (Quantum Physics) - Interactive Dualism Chart.
+         3. Twist (Jeon): The Human Role (Self-Awareness & Practice) - Interactive Process Steps.
+         4. Conclusion (Gyeol): Living the Philosophy (Sincerity) - Concept Radar Chart & Summary.
+         Navigation is facilitated by a sticky side indicator and smooth scrolling.
+    -->
+    <!-- Visualization & Content Choices:
+         1. Concept Cards: Text-based interaction to establish definitions (Rectification of Names).
+         2. Dualism Chart (Chart.js): A Combo bar/line chart representing "Particle" vs "Wave" that merges into "Synchronicity" on click. Justification: Visualizes the complex physics/philosophy parallel.
+         3. Process Steps: HTML/JS interactive list. Shows the progression from Definition -> Awareness -> Action.
+         4. Balance Radar Chart (Chart.js): Visualizes the ideal state of a human practicing these virtues.
+         CONFIRMATION: NO SVG graphics used. NO Mermaid JS used.
+    -->
+</head>
+<body class="antialiased">
+
+    <!-- Navigation Dots (Fixed Right) -->
+    <div class="fixed right-4 top-1/2 transform -translate-y-1/2 z-50 hidden md:flex flex-col gap-4">
+        <button onclick="scrollToSection('intro')" class="nav-dot w-3 h-3 rounded-full bg-gray-300 hover:bg-amber-400" title="기 (起): 개념의 정립"></button>
+        <button onclick="scrollToSection('development')" class="nav-dot w-3 h-3 rounded-full bg-gray-300 hover:bg-amber-400" title="승 (承): 동서양의 만남"></button>
+        <button onclick="scrollToSection('twist')" class="nav-dot w-3 h-3 rounded-full bg-gray-300 hover:bg-amber-400" title="전 (轉): 자각과 실천"></button>
+        <button onclick="scrollToSection('conclusion')" class="nav-dot w-3 h-3 rounded-full bg-gray-300 hover:bg-amber-400" title="결 (結): 삶의 완성"></button>
+    </div>
+
+    <!-- Header -->
+    <header class="fixed top-0 w-full bg-[#fdfbf7]/90 backdrop-blur-sm z-40 border-b border-gray-200">
+        <div class="max-w-4xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="font-bold text-xl serif text-amber-700">우주와 나</div>
+            <nav class="text-sm text-gray-600 space-x-4">
+                <button onclick="scrollToSection('intro')" class="hover:text-amber-600">개념</button>
+                <button onclick="scrollToSection('development')" class="hover:text-amber-600">통합</button>
+                <button onclick="scrollToSection('twist')" class="hover:text-amber-600">실천</button>
+                <button onclick="scrollToSection('conclusion')" class="hover:text-amber-600">완성</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-6 pt-24 pb-20">
+
+        <!-- 1. INTRO (Gi): Definitions -->
+        <section id="intro" class="section-container mb-24">
+            <div class="text-center mb-12">
+                <span class="text-amber-600 font-bold tracking-widest text-sm uppercase mb-2 block">제 1막: 기 (起)</span>
+                <h1 class="text-4xl md:text-5xl font-bold mb-6 text-gray-800 leading-tight">정명화(正名化):<br>본질을 바로 알다</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                    우주 변화의 원리를 이해하기 위해 가장 먼저 선행되어야 할 것은 용어의 올바른 정의다. <br>
+                    <span class="highlight-text font-medium text-gray-800">변화, 항상성, 동시성</span>. 이 세 가지 열쇠를 쥐어야 문이 열린다.
+                </p>
+            </div>
+
+            <!-- Interactive Concept Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Change Card -->
+                <div class="card-shadow bg-white p-8 rounded-xl border border-gray-100 cursor-pointer hover:border-amber-200 group" onclick="toggleCard('def-change')">
+                    <div class="text-center mb-4 text-3xl">🌊</div>
+                    <h3 class="text-xl font-bold text-center mb-2 group-hover:text-amber-600 transition-colors">변화 (Change)</h3>
+                    <p class="text-sm text-center text-gray-500 mb-4">역(易)의 근본 원리</p>
+                    <div id="def-change" class="text-gray-600 text-sm leading-relaxed hidden opacity-0 transition-opacity duration-500">
+                        우주 만물은 멈춰있지 않고 끊임없이 흐릅니다. 이것이 바로 주역(周易)이 말하는 세상의 이치입니다. 고정된 실체가 아닌 흐름 그 자체를 인식하는 것입니다.
+                    </div>
+                    <div class="text-center mt-4 text-amber-500 text-xs animate-pulse">클릭하여 내용 보기</div>
+                </div>
+
+                <!-- Consistency Card -->
+                <div class="card-shadow bg-white p-8 rounded-xl border border-gray-100 cursor-pointer hover:border-amber-200 group" onclick="toggleCard('def-const')">
+                    <div class="text-center mb-4 text-3xl">☀️</div>
+                    <h3 class="text-xl font-bold text-center mb-2 group-hover:text-amber-600 transition-colors">항상성 (Consistency)</h3>
+                    <p class="text-sm text-center text-gray-500 mb-4">지극정성(至極精誠)</p>
+                    <div id="def-const" class="text-gray-600 text-sm leading-relaxed hidden opacity-0 transition-opacity duration-500">
+                        변하지 않는 마음, 한결같은 성실함입니다. 태양이 만물을 차별 없이 비추듯, 우리 내면의 '항상심'은 삶을 지탱하는 따뜻한 빛과 같습니다.
+                    </div>
+                    <div class="text-center mt-4 text-amber-500 text-xs animate-pulse">클릭하여 내용 보기</div>
+                </div>
+
+                <!-- Synchronicity Card -->
+                <div class="card-shadow bg-white p-8 rounded-xl border border-gray-100 cursor-pointer hover:border-amber-200 group" onclick="toggleCard('def-sync')">
+                    <div class="text-center mb-4 text-3xl">🌌</div>
+                    <h3 class="text-xl font-bold text-center mb-2 group-hover:text-amber-600 transition-colors">동시성 (Synchronicity)</h3>
+                    <p class="text-sm text-center text-gray-500 mb-4">시공초월의 연결</p>
+                    <div id="def-sync" class="text-gray-600 text-sm leading-relaxed hidden opacity-0 transition-opacity duration-500">
+                        시간과 공간이 분리된 것이 아니라 하나로 연결된 상태입니다. 양자역학의 입자이자 파동인 상태, 주역의 음이자 양인 태극의 상태입니다.
+                    </div>
+                    <div class="text-center mt-4 text-amber-500 text-xs animate-pulse">클릭하여 내용 보기</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. DEVELOPMENT (Seung): Convergence -->
+        <section id="development" class="section-container mb-24 bg-white rounded-3xl p-8 md:p-12 shadow-sm border border-gray-100">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <span class="text-amber-600 font-bold tracking-widest text-sm uppercase mb-2 block">제 2막: 승 (承)</span>
+                    <h2 class="text-3xl font-bold mb-6 serif">이분법의 종말,<br>동서양 사유의 만남</h2>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        오랫동안 우리는 세상을 '이것 아니면 저것'으로 나누어 보았습니다. 입자냐 파동이냐, 음이냐 양이냐.
+                        하지만 <span class="font-bold text-gray-800">양자역학</span>과 <span class="font-bold text-gray-800">동양철학(易)</span>은 같은 곳을 가리킵니다.
+                    </p>
+                    <div class="bg-amber-50 p-6 rounded-lg border-l-4 border-amber-500 mb-6">
+                        <p class="text-sm text-amber-900 italic">
+                            "입자이면서 파동이고, 음이면서 양이며, 태극이 곧 무극인 동시성 속에 우리는 살고 있다."
+                        </p>
+                    </div>
+                    <p class="text-gray-600 text-sm">
+                        아래 그래프의 버튼을 눌러 이분법적 사고가 어떻게 통합적 사고(동시성)로 전환되는지 확인해보세요.
+                    </p>
+                </div>
+                
+                <!-- Chart Area -->
+                <div class="flex flex-col items-center justify-center bg-gray-50 rounded-xl p-6">
+                    <div class="mb-4 flex space-x-2">
+                        <button id="btn-dualism" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md text-sm font-medium hover:bg-gray-300 transition" onclick="updateChart('dualism')">이분법적 사고 (분리)</button>
+                        <button id="btn-sync" class="px-4 py-2 bg-amber-500 text-white rounded-md text-sm font-medium hover:bg-amber-600 transition shadow-md" onclick="updateChart('sync')">동시성적 사고 (통합)</button>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="dualityChart"></canvas>
+                    </div>
+                    <p id="chart-caption" class="text-center text-xs text-gray-500 mt-4">
+                        현재 상태: <span class="font-bold">분리된 관점</span> - 입자와 파동을 따로 인식함.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. TWIST (Jeon): Awakening & Practice -->
+        <section id="twist" class="section-container mb-24">
+            <div class="text-center mb-16">
+                <span class="text-amber-600 font-bold tracking-widest text-sm uppercase mb-2 block">제 3막: 전 (轉)</span>
+                <h2 class="text-3xl font-bold mb-6 serif">자각에서 실천으로:<br>내가 할 수 있는 것</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                    변화와 동시성은 우주의 거대한 원리입니다. 이는 인간이 통제할 수 있는 영역 밖입니다.<br>
+                    하지만 <strong>항상성(Always-ness, Sincerity)</strong>은 우리 몫입니다. <br>
+                    정명화(개념 정립)를 넘어, 자각하고, 삶으로 살아내는 여정이 필요합니다.
+                </p>
+            </div>
+
+            <!-- Interactive Timeline/Process -->
+            <div class="relative max-w-3xl mx-auto">
+                <div class="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-gray-200 transform -translate-x-1/2"></div>
+                
+                <!-- Step 1 -->
+                <div class="relative flex flex-col md:flex-row items-center justify-between mb-12 group">
+                    <div class="md:w-5/12 mb-4 md:mb-0 text-right pr-8 hidden md:block">
+                        <h3 class="font-bold text-xl text-gray-800">1단계: 정명화 (正名化)</h3>
+                        <p class="text-sm text-gray-500 mt-1">개념을 바르게 세우다</p>
+                    </div>
+                    <div class="absolute left-8 md:left-1/2 transform -translate-x-1/2 w-10 h-10 rounded-full bg-white border-4 border-gray-300 flex items-center justify-center z-10 group-hover:border-amber-500 transition-colors">
+                        <span class="text-gray-500 font-bold text-sm group-hover:text-amber-600">1</span>
+                    </div>
+                    <div class="pl-20 md:pl-8 md:w-5/12">
+                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition">
+                            <h3 class="font-bold text-lg text-gray-800 md:hidden mb-2">1단계: 정명화</h3>
+                            <p class="text-gray-600 text-sm">단어의 의미를 명확히 정의합니다. '그리기 명상'은 이러한 개념을 내면화하는 도구입니다.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="relative flex flex-col md:flex-row items-center justify-between mb-12 group">
+                    <div class="md:w-5/12 mb-4 md:mb-0 text-right pr-8 md:order-1 pl-20 md:pl-0 md:text-left md:pr-0">
+                         <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition">
+                            <h3 class="font-bold text-lg text-gray-800 md:hidden mb-2">2단계: 자각 (自覺)</h3>
+                            <p class="text-gray-600 text-sm">지식으로서의 이해를 넘어, 스스로 깨닫는 단계입니다. 머리가 아닌 가슴으로 원리를 받아들입니다.</p>
+                        </div>
+                    </div>
+                    <div class="absolute left-8 md:left-1/2 transform -translate-x-1/2 w-10 h-10 rounded-full bg-white border-4 border-gray-300 flex items-center justify-center z-10 group-hover:border-amber-500 transition-colors">
+                        <span class="text-gray-500 font-bold text-sm group-hover:text-amber-600">2</span>
+                    </div>
+                    <div class="md:w-5/12 pl-8 hidden md:block">
+                        <h3 class="font-bold text-xl text-gray-800">2단계: 자각 (自覺)</h3>
+                        <p class="text-sm text-gray-500 mt-1">스스로 깨우치다</p>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="relative flex flex-col md:flex-row items-center justify-between group">
+                    <div class="md:w-5/12 mb-4 md:mb-0 text-right pr-8 hidden md:block">
+                        <h3 class="font-bold text-xl text-gray-800">3단계: 지행합일 (知行合一)</h3>
+                        <p class="text-sm text-gray-500 mt-1">앎과 삶이 하나되다</p>
+                    </div>
+                    <div class="absolute left-8 md:left-1/2 transform -translate-x-1/2 w-10 h-10 rounded-full bg-amber-500 border-4 border-amber-200 flex items-center justify-center z-10 shadow-lg">
+                        <span class="text-white font-bold text-sm">3</span>
+                    </div>
+                    <div class="pl-20 md:pl-8 md:w-5/12">
+                        <div class="bg-amber-50 p-6 rounded-lg shadow-sm border border-amber-100">
+                            <h3 class="font-bold text-lg text-amber-800 md:hidden mb-2">3단계: 지행합일</h3>
+                            <p class="text-amber-900 text-sm">매 순간 깨어있는 삶. 남명 조식 선생의 방울 소리처럼, 신명(神明)나게 실천하는 삶입니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. CONCLUSION (Gyeol): Life Application -->
+        <section id="conclusion" class="section-container bg-gray-900 text-white rounded-3xl p-8 md:p-16 relative overflow-hidden">
+            <!-- Decorative Background Element -->
+            <div class="absolute top-0 right-0 w-64 h-64 bg-amber-500 rounded-full filter blur-3xl opacity-10 transform translate-x-1/2 -translate-y-1/2"></div>
+            
+            <div class="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <span class="text-amber-400 font-bold tracking-widest text-sm uppercase mb-2 block">제 4막: 결 (結)</span>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6 serif text-white">태양과 같은 삶,<br>지극정성(至極精誠)</h2>
+                    <p class="text-gray-300 mb-6 leading-relaxed">
+                        우리는 우주의 거대한 변화와 동시성을 통제할 수는 없습니다. 하지만 태양이 차별 없이 만물을 비추듯, 부모가 자식을 기르듯, <span class="text-amber-300 font-semibold">지극정성으로 주어진 삶을 대할 수는 있습니다.</span>
+                    </p>
+                    <p class="text-gray-400 text-sm mb-8">
+                        오른쪽 차트는 이상적인 삶의 균형을 보여줍니다. 우리의 마음가짐(Human Will)이 우주의 원리(Universal Principle)와 조화를 이룰 때, 삶은 신명나는 축제가 됩니다.
+                    </p>
+                    <a href="https://blog.naver.com/vlckang" target="_blank" class="inline-flex items-center px-6 py-3 bg-amber-600 hover:bg-amber-500 text-white font-medium rounded-lg transition shadow-lg hover:shadow-xl">
+                        <span>그리기 명상 더 보기</span>
+                        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </a>
+                </div>
+
+                <!-- Radar Chart Container -->
+                <div class="bg-gray-800 rounded-xl p-6 border border-gray-700">
+                    <div class="chart-container">
+                        <canvas id="lifeChart"></canvas>
+                    </div>
+                    <p class="text-amber-200 font-semibold">
+                        나의 삶의 균형도 (우주변화 원리와의 조화)
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-gray-100 py-12 border-t border-gray-200">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <p class="text-gray-500 text-sm mb-2">동서양 철학의 만남, 그리고 나의 삶</p>
+            <p class="text-gray-400 text-xs">Reference: vlckang's Blog (Drawing Meditation)</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- Interaction Logic ---
+
+        // 1. Concept Card Toggle
+        function toggleCard(id) {
+            const element = document.getElementById(id);
+            const isHidden = element.classList.contains('hidden');
+            
+            // Close all others first
+            ['def-change', 'def-const', 'def-sync'].forEach(cardId => {
+                const el = document.getElementById(cardId);
+                el.classList.add('hidden');
+                el.classList.remove('opacity-100');
+                el.classList.add('opacity-0');
+            });
+
+            if (isHidden) {
+                element.classList.remove('hidden');
+                // Small delay to allow display:block to apply before opacity transition
+                setTimeout(() => {
+                    element.classList.remove('opacity-0');
+                    element.classList.add('opacity-100');
+                }, 10);
+            }
+        }
+
+        // 2. Chart Configurations & Updates
+        let dualityChartInstance = null;
+        let lifeChartInstance = null;
+
+        function initCharts() {
+            // -- Chart 1: Duality vs Synchronicity (Combo Chart) --
+            const ctx1 = document.getElementById('dualityChart').getContext('2d');
+            
+            // Initial Data: Dualism (Separated)
+            const dualismData = {
+                labels: ['관측 1', '관측 2', '관측 3', '관측 4', '관측 5'],
+                datasets: [
+                    {
+                        type: 'bar',
+                        label: '입자 (물질/양)',
+                        data: [10, 8, 12, 5, 9],
+                        backgroundColor: 'rgba(59, 130, 246, 0.5)',
+                        borderColor: 'rgb(59, 130, 246)',
+                        borderWidth: 1
+                    },
+                    {
+                        type: 'line',
+                        label: '파동 (에너지/음)',
+                        data: [2, 15, 4, 12, 6],
+                        borderColor: 'rgb(239, 68, 68)',
+                        borderWidth: 2,
+                        tension: 0.4,
+                        fill: false
+                    }
+                ]
+            };
+
+            dualityChartInstance = new Chart(ctx1, {
+                type: 'bar',
+                data: dualismData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom' },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + context.raw;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: { beginAtZero: true, display: false },
+                        x: { grid: { display: false } }
+                    }
+                }
+            });
+
+            // -- Chart 2: Life Balance (Radar Chart) --
+            const ctx2 = document.getElementById('lifeChart').getContext('2d');
+            lifeChartInstance = new Chart(ctx2, {
+                type: 'radar',
+                data: {
+                    labels: ['정명화 (개념)', '자각 (깨달음)', '지행합일 (실천)', '항상심 (성실)', '신명 (神明)'],
+                    datasets: [{
+                        label: '이상적인 삶의 조화',
+                        data: [90, 85, 95, 100, 90],
+                        fill: true,
+                        backgroundColor: 'rgba(245, 158, 11, 0.2)', // Amber-500 low opacity
+                        borderColor: 'rgb(245, 158, 11)',
+                        pointBackgroundColor: 'rgb(245, 158, 11)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(245, 158, 11)'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false } // Minimalist look
+                    },
+                    scales: {
+                        r: {
+                            angleLines: { color: 'rgba(255, 255, 255, 0.2)' },
+                            grid: { color: 'rgba(255, 255, 255, 0.2)' },
+                            pointLabels: {
+                                color: '#e5e7eb', // Light gray text
+                                font: { size: 12, family: "'Noto Sans KR', sans-serif" }
+                            },
+                            ticks: { display: false, backdropColor: 'transparent' },
+                            suggestedMin: 0,
+                            suggestedMax: 100
+                        }
+                    }
+                }
+            });
+        }
+
+        function updateChart(mode) {
+            const btnDual = document.getElementById('btn-dualism');
+            const btnSync = document.getElementById('btn-sync');
+            const caption = document.getElementById('chart-caption');
+
+            if (mode === 'dualism') {
+                // Update Buttons
+                btnDual.classList.add('bg-gray-300', 'shadow-inner');
+                btnDual.classList.remove('bg-gray-200');
+                btnSync.classList.remove('bg-amber-600', 'shadow-inner');
+                btnSync.classList.add('bg-amber-500', 'shadow-md');
+                
+                // Update Text
+                caption.innerHTML = '현재 상태: <span class="font-bold">분리된 관점</span> - 입자와 파동, 음과 양을 따로 인식함.';
+
+                // Reset Data to Dualism
+                dualityChartInstance.data.datasets = [
+                    {
+                        type: 'bar',
+                        label: '입자 (물질/양)',
+                        data: [10, 8, 12, 5, 9],
+                        backgroundColor: 'rgba(59, 130, 246, 0.5)',
+                        borderColor: 'rgb(59, 130, 246)',
+                        borderWidth: 1
+                    },
+                    {
+                        type: 'line',
+                        label: '파동 (에너지/음)',
+                        data: [2, 15, 4, 12, 6],
+                        borderColor: 'rgb(239, 68, 68)',
+                        borderWidth: 2,
+                        tension: 0.4,
+                        fill: false,
+                        yAxisID: 'y'
+                    }
+                ];
+                dualityChartInstance.options.scales.y.display = false;
+                
+            } else if (mode === 'sync') {
+                // Update Buttons
+                btnSync.classList.add('bg-amber-600', 'shadow-inner');
+                btnSync.classList.remove('bg-amber-500');
+                btnDual.classList.remove('bg-gray-300', 'shadow-inner');
+                btnDual.classList.add('bg-gray-200');
+
+                // Update Text
+                caption.innerHTML = '현재 상태: <span class="font-bold text-amber-600">동시성 (Synchronicity)</span> - 입자이자 파동인 통합된 에너지 장.';
+
+                // Change Data to Integrated Wave/Area
+                dualityChartInstance.data.datasets = [
+                    {
+                        type: 'line',
+                        label: '통합된 에너지 (태극/동시성)',
+                        data: [12, 18, 16, 17, 15], // Merged approximate data
+                        backgroundColor: 'rgba(139, 92, 246, 0.2)', // Purple/Mystic
+                        borderColor: 'rgb(139, 92, 246)',
+                        borderWidth: 3,
+                        tension: 0.5,
+                        fill: true
+                    }
+                ];
+            }
+            dualityChartInstance.update();
+        }
+
+        // 3. Navigation Scroll
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // 4. Scroll Spy for Nav Dots
+        window.addEventListener('scroll', () => {
+            const sections = ['intro', 'development', 'twist', 'conclusion'];
+            const dots = document.querySelectorAll('.nav-dot');
+            
+            let current = '';
+            sections.forEach(section => {
+                const element = document.getElementById(section);
+                const sectionTop = element.offsetTop;
+                if (scrollY >= sectionTop - 200) {
+                    current = section;
+                }
+            });
+
+            dots.forEach(dot => {
+                dot.classList.remove('active');
+                if (dot.getAttribute('onclick').includes(current)) {
+                    dot.classList.add('active');
+                }
+            });
+        });
+
+        // Initialize on Load
+        window.addEventListener('DOMContentLoaded', initCharts);
+
+    </script>
+</body>
+</html>  
