@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>나의 인생 2막 사용 설명서</title>
+    <!-- Tailwind CSS for Modern Styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- AOS Library for Animations -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Pretendard:wght@300;600&family=Noto+Sans+KR:wght@400;500&display=swap');
+        body { font-family: 'Pretendard', sans-serif; background-color: #f8f9fa; color: #333; }
+        .serif { font-family: 'Noto Serif KR', serif; }
+        .sans-kr { font-family: 'Noto Sans KR', sans-serif; }
+        .bg-zen { background: linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.8)), url('https://images.unsplash.com/photo-1507502707541-f369a3b18502?q=80&w=2000') center/cover; }
+        
+        /* Modal Blur Effect */
+        .modal-active { overflow: hidden; }
+    </style>
+</head>
+<body>
+
+    <!-- 1. Hero Section -->
+    <section class="h-screen flex flex-col justify-center items-center bg-zen text-center p-6">
+        <h2 class="text-xl mb-4 tracking-widest text-gray-600 animate-pulse font-light">PHILOSOPHY & TECHNOLOGY</h2>
+        <h1 class="text-5xl md:text-7xl font-bold serif mb-6" data-aos="fade-up">나의 인생 2막 사용 설명서</h1>
+        <p class="text-lg md:text-xl text-gray-700 max-w-2xl leading-relaxed" data-aos="fade-up" data-aos-delay="200">
+            "자세는 낮추고,<br>AI 시대 인생2막"
+        </p>
+        <div class="mt-12 animate-bounce">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+        </div>
+    </section>
+
+   <section class="py-20 px-6 max-w-5xl mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl font-bold serif border-b-2 border-neutral-900 pb-4 inline-block tracking-wide">The Journey (2015-2023)</h2>
+        </div>
+        
+        <div class="space-y-16">
+            <div class="flex flex-col md:flex-row gap-8 items-center" data-aos="fade-right">
+                <div class="w-full md:w-1/3 h-64 bg-neutral-900 rounded-2xl shadow-md overflow-hidden flex flex-col items-center justify-center text-white p-6 border border-neutral-800 transition-transform duration-300 hover:scale-105">
+                    <span class="text-xs font-semibold tracking-wider text-green-400 uppercase mb-2">Phase 1</span>
+                    <span class="text-lg font-bold tracking-tight text-center">2015.08 ~ 2017.07</span>
+                    <p class="text-xs text-neutral-400 mt-3 text-center">나를 찾는 공부의 시작</p>
+                </div>
+                <div class="w-full md:w-2/3">
+                    <div class="inline-block px-3 py-1 bg-neutral-100 text-neutral-700 rounded-full text-xs font-semibold mb-3">준비와 사색</div>
+                    <h3 class="text-2xl font-bold text-neutral-800 mb-3">My Way의 시작</h3>
+                    <p class="text-neutral-600 leading-relaxed">
+                        퇴직 후 온전히 나를 찾는 공부에 주력하던 시기입니다. 단순히 쉬는 것이 아닌, 향후 삶을 지탱할 지혜를 모으기 위해 '일하며 공부하는 System'의 주춧돌을 세웠습니다.
+                    </p>
+                </div>
+            </div>
+
+            <div class="flex flex-col md:flex-row-reverse gap-8 items-center" data-aos="fade-left">
+                <div class="w-full md:w-1/3 h-64 bg-neutral-900 rounded-2xl shadow-md overflow-hidden flex flex-col items-center justify-center text-white p-6 border border-neutral-800 transition-transform duration-300 hover:scale-105">
+                    <span class="text-xs font-semibold tracking-wider text-green-400 uppercase mb-2">하심(下心)</span>
+                    <span class="text-xl font-bold tracking-widest text-center">주경야독 (晝耕夜讀)</span>
+                    <p class="text-xs text-neutral-400 mt-3 text-center">6년간의 현장 노동과 학문</p>
+                </div>
+                <div class="w-full md:w-2/3 md:text-right flex flex-col md:items-end">
+                    <div class="inline-block px-3 py-1 bg-neutral-100 text-neutral-700 rounded-full text-xs font-semibold mb-3">지행합일 (知行合一)</div>
+                    <h3 class="text-2xl font-bold text-neutral-800 mb-3">2017.07 ~ 2023.07 낮은 자세로</h3>
+                    <blockquote class="text-neutral-700 font-medium italic border-l-4 md:border-l-0 md:border-r-4 border-green-500 pl-4 md:pl-0 pr-0 md:pr-4 py-1 mb-3 bg-neutral-50 md:bg-transparent rounded">
+                        "오전에는 온라인 수업, 오후에는 택배 분류 현장 노동"
+                    </blockquote>
+                    <p class="text-neutral-600 leading-relaxed">
+                        오전에는 대학교 온라인 수업을 통해 동양철학의 깊이를 더하고, 오후에는 택배 분류라는 고된 육체노동을 이어갔습니다. 이론과 삶의 현장이 하나가 되는 귀중한 6년의 세월이었습니다.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-black text-white py-20 px-6">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="text-3xl font-bold serif mb-12 text-center" data-aos="zoom-in">AI 시대, 왜 다시 철학인가?</h2>
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6" data-aos="fade-up">
+                    <p class="text-neutral-400 leading-relaxed">
+                        AGI(인공일반지능)의 도래와 월드코인, 기본소득 논의까지... 우리는 기술에 매몰되지 않고 <span class="text-white font-semibold">'인간의 쓸모'</span>를 재정의해야 합니다.
+                    </p>
+                    <ul class="space-y-3 text-sm text-neutral-300">
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-400 mt-1">✔</span>
+                            <span>AI는 강력한 기술이지만, 그것을 운용하는 방향타는 결국 인간의 '철학'입니다.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-400 mt-1">✔</span>
+                            <span>보편 소득 시대가 오면, 인간에게 남는 가장 고귀한 숙제는 '존재의 가치'를 증명하는 것입니다.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-400 mt-1">✔</span>
+                            <span>숨 가쁘게 기술을 따라가는 삶을 넘어, 변화의 본질을 관조하는 내면의 힘이 필요합니다.</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="border border-neutral-800 p-8 rounded-2xl bg-neutral-900/50 backdrop-blur-sm shadow-2xl transition-all duration-300 hover:border-neutral-700" data-aos="flip-left">
+                    <div class="w-2 h-2 bg-green-400 rounded-full mb-4 animate-pulse"></div>
+                    <h4 class="text-xl font-bold mb-4 text-white">현재 활동: Webtoon · Art Seller · 신명상담</h4>
+                    <p class="text-neutral-400 leading-relaxed text-sm">
+                        수년간 축적한 동양철학과 현대 물리학의 정수를 직관적인 일러스트와 웹툰에 담아 세상과 소통합니다. 주역과 명리학을 바탕으로 삶의 길을 잃은 이들에게 깊이 있는 신명(神明) 상담을 전하고 있습니다.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 px-6 max-w-5xl mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl font-bold serif border-b-2 border-neutral-900 pb-4 inline-block tracking-wide">The Journey (2023.08 ~ Present)</h2>
+        </div>
+        
+        <div class="space-y-12">
+            <div class="flex flex-col md:flex-row gap-8 items-center" data-aos="fade-right">
+                <div class="w-full md:w-1/3 h-64 bg-neutral-900 rounded-2xl shadow-md overflow-hidden flex flex-col items-center justify-center text-white p-6 border border-neutral-800 transition-transform duration-300 hover:scale-105">
+                    <span class="text-xs font-semibold tracking-wider text-green-400 uppercase mb-2">3rd Life</span>
+                    <span class="text-2xl font-bold tracking-tight text-center">인생 3모작</span>
+                    <p class="text-xs text-neutral-400 mt-3 text-center">새로운 창작의 세계로</p>
+                </div>
+                <div class="w-full md:w-2/3">
+                    <div class="inline-block px-3 py-1 bg-neutral-100 text-neutral-700 rounded-full text-xs font-semibold mb-3">현재 진행형</div>
+                    <h3 class="text-2xl font-bold text-neutral-800 mb-3">2023.08 새로운 도약</h3>
+                    <p class="text-neutral-600 leading-relaxed mb-4">
+                        육체노동의 시기를 지나 본격적인 문화 예술 창작과 상담가로서의 삶을 펼치고 있습니다. 시니어 웹툰 작가(Senior WebToon)이자 아트 셀러로서, 그리고 철학적 통찰을 나누는 공간을 만들어갑니다.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-neutral-50 border border-neutral-200 text-neutral-600 rounded-md text-xs font-medium">#Webtoon</span>
+                        <span class="px-3 py-1 bg-neutral-50 border border-neutral-200 text-neutral-600 rounded-md text-xs font-medium">#ArtSeller</span>
+                        <span class="px-3 py-1 bg-neutral-50 border border-neutral-200 text-neutral-600 rounded-md text-xs font-medium">#신명상담</span>
+                        <span class="px-3 py-1 bg-neutral-50 border border-neutral-200 text-neutral-600 rounded-md text-xs font-medium">#글로벌여정</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Tools & Media -->
+    <section class="py-20 px-6 bg-white overflow-hidden">
+        <div class="max-w-5xl mx-auto text-center">
+            <h2 class="text-2xl font-bold mb-12">나의 정보 창고</h2>
+            <div class="flex flex-wrap justify-center gap-6">
+                <!-- Linked Notion Button -->
+                <button onclick="openPhilosophyModal()" class="px-6 py-3 bg-neutral-900 text-white font-semibold rounded-full hover:bg-neutral-700 transition shadow-md flex items-center gap-2 group">
+                    <span class="w-2 h-2 bg-green-400 rounded-full group-hover:animate-ping"></span>
+                    변화원리I
+                </button>
+                <a href="https://chan-61.github.io/kchan/3factors-1%20(3).html" target="_blank" class="px-5 py-3 bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-gray-900 transition rounded-full text-sm font-medium shadow-sm inline-block">
+    변화원리II
+</a>
+
+<a href="https://blog.naver.com/vlckang/224287450544" target="_blank" class="px-5 py-3 bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-gray-900 transition rounded-full text-sm font-medium shadow-sm inline-block">
+    일본한달살기
+</a>
+                <span class="px-5 py-3 bg-gray-100 text-gray-500 rounded-full text-sm font-medium">EBS</span>
+                <span class="px-5 py-3 bg-gray-100 text-gray-500 rounded-full text-sm font-medium">NHK</span>
+                <span class="px-5 py-3 bg-gray-100 text-gray-500 rounded-full text-sm font-medium">YouTube</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== 5. Philosophy Archive Modal (통합된 노션 콘텐츠 영역) ====== -->
+    <div id="philosophyModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex justify-center items-center p-4 overflow-y-auto">
+        <div class="bg-[#fdfbf7] text-[#333] w-full max-w-4xl rounded-2xl shadow-2xl overflow-hidden max-h-[90vh] flex flex-col relative sans-kr animate-[fadeIn_0.3s_ease-out]">
+            
+            <!-- Close Button & Lang Header -->
+            <div class="flex justify-between items-center px-6 py-4 border-b border-gray-200 bg-white sticky top-0 z-10">
+                <!-- Language Buttons -->
+                <div class="flex gap-4 text-sm font-medium">
+                    <button onclick="setLanguageByUser('ko')" class="text-gray-500 hover:text-black transition">KR</button>
+                    <button onclick="setLanguageByUser('en')" class="text-gray-500 hover:text-black transition">EN</button>
+                    <button onclick="setLanguageByUser('jp')" class="text-gray-500 hover:text-black transition">JP</button>
+                    <button onclick="setLanguageByUser('es')" class="text-gray-500 hover:text-black transition">ES</button>
+                </div>
+                <!-- Close Button -->
+                <button onclick="closePhilosophyModal()" class="text-gray-400 hover:text-black text-2xl font-bold p-1 transition">&times;</button>
+            </div>
+
+            <!-- Modal Content Body -->
+            <div class="overflow-y-auto p-8 md:p-12 space-y-16">
+                <header class="text-center">
+                    <h1 class="text-4xl font-semibold mb-4 serif" data-i18n="title">
+                        변화 · 항상성 · 동시성
+                    </h1>
+                    <p class="text-gray-600 text-lg" data-i18n="subtitle">
+                        우주와 인간을 관통하는 구조적 원리
+                    </p>
+                </header>
+
+                <main class="space-y-16">
+                    <section class="max-w-2xl mx-auto text-center md:text-left">
+                        <h2 class="text-2xl font-semibold mb-4 serif border-l-4 border-black pl-3" data-i18n="sec1_title">
+                            개념의 정명화
+                        </h2>
+                        <p class="leading-relaxed text-gray-700 text-lg" data-i18n="sec1_text">
+                            변화는 현상의 이동이 아니라 구조의 작동이며, 항상성은 고정이 아니라 반복 가능한 질서다.
+                            동시성은 서로 다른 층위의 사건이 하나의 구조로 묶이는 방식이다.
+                        </p>
+                    </section>
+
+                    <section class="grid md:grid-cols-3 gap-6">
+                        <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
+                            <h3 class="font-semibold text-xl mb-3 serif text-neutral-800" data-i18n="change_title">변화</h3>
+                            <p class="text-sm text-gray-600 leading-relaxed" data-i18n="change_text">
+                                모든 존재는 정지하지 않으며, 변화 그 자체가 실재다.
+                            </p>
+                        </div>
+
+                        <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
+                            <h3 class="font-semibold text-xl mb-3 serif text-neutral-800" data-i18n="homeostasis_title">항상성</h3>
+                            <p class="text-sm text-gray-600 leading-relaxed" data-i18n="homeostasis_text">
+                                변화 속에서도 유지되는 구조적 균형.
+                            </p>
+                        </div>
+
+                        <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
+                            <h3 class="font-semibold text-xl mb-3 serif text-neutral-800" data-i18n="synch_title">동시성</h3>
+                            <p class="text-sm text-gray-600 leading-relaxed" data-i18n="synch_text">
+                                인과를 넘어 구조적으로 연결되는 사건들.
+                            </p>
+                        </div>
+                    </section>
+
+                    <section class="text-center pt-6">
+                        <a href="https://blog.naver.com/vlckang" target="_blank"
+                           class="inline-block px-8 py-4 rounded-full bg-black text-white font-medium text-sm hover:bg-gray-800 transition shadow-lg hover:shadow-xl"
+                           data-i18n="cta">
+                            그리기 명상 더보기
+                        </a>
+                    </section>
+                </main>
+
+                <footer class="pt-10 border-t border-gray-200 text-center text-xs text-gray-400">
+                    © Structural Philosophy Archive
+                </footer>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="py-10 bg-gray-100 text-center text-sm text-gray-500">
+        <p>© 2026 인생 2막 사용 설명서 - 철학자 OOO</p>
+        <p class="mt-2 text-xs">As of Feb 06, 2026 | 510일째 생식 임상 실험 중</p>
+    </footer>
+
+    <!-- ====== JavaScript Layout ====== -->
+    <script>
+        // Initialize Animations
+        AOS.init({ duration: 1000, once: true });
+
+        // Modal Controls
+        function openPhilosophyModal() {
+            const modal = document.getElementById('philosophyModal');
+            modal.classList.remove('hidden');
+            document.body.classList.add('modal-active');
+            detectLanguage(); // 모달이 열릴 때 자동 언어 감지 작동
+        }
+
+        function closePhilosophyModal() {
+            const modal = document.getElementById('philosophyModal');
+            modal.classList.add('hidden');
+            document.body.classList.remove('modal-active');
+        }
+
+        // 다국어 데이터 스크립트 (학자님 원본 코드 로직 보존)
+        const i18n = {
+            ko: {
+                title: "변화 · 항상성 · 동시성",
+                subtitle: "우주와 인간을 관통하는 구조적 원리",
+                sec1_title: "개념의 정명화",
+                sec1_text: "변화는 현상의 이동이 아니라 구조의 작동이며, 항상성은 고정이 아니라 반복 가능한 질서다. 동시성은 서로 다른 층위의 사건이 하나의 구조로 묶이는 방식이다.",
+                change_title: "변화",
+                change_text: "모든 존재는 정지하지 않으며, 변화 그 자체가 실재다.",
+                homeostasis_title: "항상성",
+                homeostasis_text: "변화 속에서도 유지되는 구조적 균형.",
+                synch_title: "동시성",
+                synch_text: "인과를 넘어 구조적으로 연결되는 사건들.",
+                cta: "그리기 명상 더보기"
+            },
+            "en-US": {
+                title: "Change · Homeostasis · Synchronicity",
+                subtitle: "Structural principles underlying the universe and human experience",
+                sec1_title: "Conceptual Clarification",
+                sec1_text: "Change is not mere movement but structural operation. Homeostasis is not fixation, but repeatable order. Synchronicity binds events across layers into a single structure.",
+                change_title: "Change",
+                change_text: "Nothing remains static; change itself is reality.",
+                homeostasis_title: "Homeostasis",
+                homeostasis_text: "A structural balance sustained within change.",
+                synch_title: "Synchronicity",
+                synch_text: "Events structurally connected beyond causality.",
+                cta: "View Drawing Meditation"
+            },
+            "en-GB": {
+                title: "Change · Homeostasis · Synchronicity",
+                subtitle: "Structural principles underlying the universe and human experience",
+                sec1_title: "Conceptual Clarification",
+                sec1_text: "Change is not mere movement but structural operation. Homeostasis is not fixation, but repeatable order. Synchronicity binds events across layers within a single structure.",
+                change_title: "Change",
+                change_text: "Nothing remains static; change itself is reality.",
+                homeostasis_title: "Homeostasis",
+                homeostasis_text: "A structural balance sustained within change.",
+                synch_title: "Synchronicity",
+                synch_text: "Events structurally connected beyond causality.",
+                cta: "View Drawing Meditation"
+            },
+            jp: {
+                title: "変化・恒常性・同時性",
+                subtitle: "宇宙と人間을貫く構造的原理",
+                sec1_title: "概念の正名化",
+                sec1_text: "変化とは現象の移動ではなく構造の作用であり、恒常性とは固定ではなく反復可能な秩序である。同時性とは異なるレイヤーの出来事が一つの構造に統合される手法である。",
+                change_title: "変化",
+                change_text: "すべての存在は静止せず、変化そのものが実在である。",
+                homeostasis_title: "恒常性",
+                homeostasis_text: "変化の中で維持される構造的均衡。",
+                synch_title: "同時性",
+                synch_text: "因果を超えて構造的に結びつく出来事。",
+                cta: "描く瞑想を見る"
+            },
+            es: {
+                title: "Cambio · Homeostasis · Sincronicidad",
+                subtitle: "Principios estructurales que atraviesan el universo y al ser humano",
+                sec1_title: "Clarificación conceptual",
+                sec1_text: "El cambio no es movimiento, sino operación estructural. La homeostasis es un orden repetible dentro del cambio. La sincronicidad une eventos de diferentes niveles en una sola estructura.",
+                change_title: "Cambio",
+                change_text: "Nada permanece estático; el cambio es la realidad.",
+                homeostasis_title: "Homeostasis",
+                homeostasis_text: "Equilibrio estructural mantenido dentro del cambio.",
+                synch_title: "Sincronicidad",
+                synch_text: "Eventos conectados estructuralmente más allá de la causalidad.",
+                cta: "Ver meditación dibujada"
+            }
+        };
+
+        let userSelected = false;
+
+        function applyLanguage(lang){
+            const dict = i18n[lang] || i18n.ko;
+            document.querySelectorAll("[data-i18n]").forEach(el=>{
+                const key = el.getAttribute("data-i18n");
+                if(dict[key]) el.textContent = dict[key];
+            });
+        }
+
+        function detectLanguage(){
+            if(userSelected) return;
+            const lang = navigator.languages?.[0] || navigator.language || "ko";
+
+            if(lang.startsWith("en")){
+                applyLanguage(lang.toLowerCase()==="en-gb" ? "en-GB" : "en-US");
+            } else if(lang.startsWith("ja")){
+                applyLanguage("jp");
+            } else if(lang.startsWith("es")){
+                applyLanguage("es");
+            } else {
+                applyLanguage("ko");
+            }
+        }
+
+        function setLanguageByUser(lang){
+            userSelected = true;
+            if(lang==="en") applyLanguage("en-US");
+            else applyLanguage(lang);
+        }
+    </script>
+</body>
+</html>
