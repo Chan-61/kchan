@@ -381,18 +381,83 @@
         </button>
     </div>
 </section>
-<!-- Utterances 댓글 서비스 연동 -->
-<div id="comments-container" style="max-width: 800px; margin: 40px auto; padding: 0 20px;">
-  <h3 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 20px; border-bottom: 2px solid #eaecef; padding-bottom: 8px;">댓글과 토론</h3>
-  <script src="https://utteranc.es/client.js"
-          repo="chan-61/kchan"
-          issue-term="pathname"
-          label="Comment"
-          theme="github-light"
-          crossorigin="anonymous"
-          async>
-  </script>
+<!-- ================= [댓글 및 토론 아코디언 섹션] ================= -->
+<div class="comments-accordion-wrapper" style="max-width: 800px; margin: 40px auto; padding: 0 20px; font-family: 'Noto Sans KR', sans-serif;">
+  
+  <!-- 댓글 토글 버튼 -->
+  <button id="toggle-comments-btn" onclick="toggleComments()" style="
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 24px;
+    background-color: #f7f7f5;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    color: #4a4a4a;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease-in-out;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+  " onmouseover="this.style.borderColor='#d97706'; this.style.color='#d97706'; this.style.backgroundColor='#efefe9';" 
+     onmouseout="this.style.borderColor='#e0e0e0'; this.style.color='#4a4a4a'; this.style.backgroundColor='#f7f7f5';">
+    
+    <span style="display: flex; align-items: center; gap: 8px;">
+      <i class="fa-regular fa-comments" style="font-size: 1.2rem;"></i>
+      <span>댓글과 토론 열기 / 접기</span>
+    </span>
+    
+    <!-- 화살표 아이콘 -->
+    <i id="accordion-arrow" class="fa-solid fa-chevron-down" style="
+      transition: transform 0.3s ease;
+      color: #999;
+    "></i>
+  </button>
+
+  <!-- 댓글 콘텐츠 영역 (초기 상태: 숨김) -->
+  <div id="comments-content-area" style="
+    display: none;
+    margin-top: 16px;
+    padding: 20px;
+    border: 1px solid #f1f1ee;
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  ">
+    <!-- Utterances 댓글 위젯 로드 -->
+    <script src="https://utteranc.es/client.js"
+            repo="chan-61/kchan"
+            issue-term="pathname"
+            label="Comment"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+  </div>
 </div>
+
+<!-- 아코디언 제어 스크립트 -->
+<script>
+  function toggleComments() {
+    const contentArea = document.getElementById('comments-content-area');
+    const arrow = document.getElementById('accordion-arrow');
+    
+    if (contentArea.style.display === 'none' || contentArea.style.display === '') {
+      // 열기
+      contentArea.style.display = 'block';
+      arrow.style.transform = 'rotate(180deg)';
+      arrow.style.color = '#d97706';
+    } else {
+      // 닫기
+      contentArea.style.display = 'none';
+      arrow.style.transform = 'rotate(0deg)';
+      arrow.style.color = '#999';
+    }
+  }
+</script>
+<!-- ============================================================= -->
+
 
             <footer class="mt-20 text-center text-gray-400 text-sm pb-10">
                 &copy; 2026 Chan's Philosophy & Dev.
