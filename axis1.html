@@ -345,16 +345,19 @@
                             </p>
                             
                             <div class="grid grid-cols-2 gap-4 mt-6">
-                                <div onclick="window.open('#', '_blank')" class="bg-white/10 hover:bg-white/20 p-4 rounded-xl cursor-pointer transition text-center border border-white/10 hover:border-amber-500 group">
-                                    <i class="fas fa-blog text-green-400 mb-2 text-2xl group-hover:scale-110 transition-transform"></i>
-                                    <div class="text-xs font-bold">My Blog</div>
-                                </div>
-                                <div onclick="window.open('#', '_blank')" class="bg-white/10 hover:bg-white/20 p-4 rounded-xl cursor-pointer transition text-center border border-white/10 hover:border-amber-500 group">
-                                    <i class="fas fa-file-alt text-amber-400 mb-2 text-2xl group-hover:scale-110 transition-transform"></i>
-                                    <div class="text-xs font-bold">My Notion</div>
-                                </div>
-                            </div>
-                        </div>
+    <!-- My Blog -> 네이버 블로그 메인 연결 -->
+    <div onclick="window.open('https://blog.naver.com/vlckang', '_blank')" class="bg-white/10 hover:bg-white/20 p-4 rounded-xl cursor-pointer transition text-center border border-white/10 hover:border-amber-500 group">
+        <i class="fas fa-blog text-green-400 mb-2 text-2xl group-hover:scale-110 transition-transform"></i>
+        <div class="text-xs font-bold">My Blog</div>
+    </div>
+    
+    <!-- My Notion -> Art Seller 네이버 블로그 특정 포스팅 연결 -->
+    <div onclick="window.open('https://blog.naver.com/vlckang/224320940160', '_blank')" class="bg-white/10 hover:bg-white/20 p-4 rounded-xl cursor-pointer transition text-center border border-white/10 hover:border-amber-500 group">
+        <i class="fas fa-file-alt text-amber-400 mb-2 text-2xl group-hover:scale-110 transition-transform"></i>
+        <div class="text-xs font-bold">Art Seller</div>
+    </div>
+</div>
+
                         <div class="chart-container" style="height: 250px;">
                             <canvas id="lifeChart"></canvas>
                         </div>
