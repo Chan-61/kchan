@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chan's Webtoon & Insights</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Noto+Serif+KR:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #0b0f19;
+        }
+        .serif {
+            font-family: 'Noto Serif KR', serif;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b0f19;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1f2937;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #374151;
+        }
+        /* Active nav item */
+        .nav-active {
+            background-color: rgba(245, 158, 11, 0.1);
+            color: #f59e0b;
+            border-right: 2px solid #f59e0b;
+        }
+        .section-container {
+            padding-top: 5rem;
+            padding-bottom: 5rem;
+            border-bottom: 1px solid #1e293b;
+        }
+    </style>
+</head>
+<body class="text-gray-100 overflow-x-hidden">
+
+    <div class="flex min-h-screen relative">
+        
+        <aside class="fixed inset-y-0 left-0 w-64 bg-slate-950 border-r border-slate-900 hidden lg:flex flex-col z-30">
+            <div class="p-6 border-b border-slate-900 flex items-center gap-3">
+                <div class="w-10 h-10 bg-amber-500 rounded-xl flex items-center justify-center text-slate-950 font-black text-xl shadow-lg shadow-amber-500/20">
+                    K
+                </div>
+                <div>
+                    <h1 class="font-bold text-sm tracking-wider text-white">CHAN'S AXIS</h1>
+                    <p class="text-xs text-gray-500">Webtoon & Philosophy</p>
+                </div>
+            </div>
+
+            <nav class="flex-1 p-4 space-y-1">
+                <a href="#intro" class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-400 hover:text-white hover:bg-slate-900/50 transition duration-200 text-sm font-medium">
+                    <i class="fas fa-home w-5 text-center text-base"></i>
+                    <span>연구개요</span>
+                </a>
+                <a href="#act1" class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-400 hover:text-white hover:bg-slate-900/50 transition duration-200 text-sm font-medium">
+                    <i class="fas fa-seedling w-5 text-center text-base"></i>
+                    <span>제 1막: 기 (起)</span>
+                </a>
+                <a href="#act2" class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-400 hover:text-white hover:bg-slate-900/50 transition duration-200 text-sm font-medium">
+                    <i class="fas fa-fire w-5 text-center text-base"></i>
+                    <span>제 2막: 승 (承)</span>
+                </a>
+                <a href="#act3" class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-400 hover:text-white hover:bg-slate-900/50 transition duration-200 text-sm font-medium">
+                    <i class="fas fa-bolt w-5 text-center text-base"></i>
+                    <span>제 3막: 전 (轉)</span>
+                </a>
+                <a href="#conclusion" class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-400 hover:text-white hover:bg-slate-900/50 transition duration-200 text-sm font-medium">
+                    <i class="fas fa-star w-5 text-center text-base"></i>
+                    <span>제 4막: 결 (結)</span>
+                </a>
+                
+                <hr class="border-slate-900 my-4">
+                
+                <a href="mailto:vlckang@naver.com" class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-400 hover:text-amber-400 hover:bg-amber-500/5 transition duration-200 text-sm font-medium cursor-pointer">
+                    <i class="fas fa-envelope w-5 text-center text-base text-amber-500"></i>
+                    <span>Q&A (이메일 문의)</span>
+                </a>
+            </nav>
+
+            <div class="p-4 border-t border-slate-900 text-center">
+                <button onclick="location.href='https://chan-61.github.io/kchan/'" class="w-full bg-slate-900 hover:bg-slate-800 text-gray-300 py-2.5 px-4 rounded-xl text-xs font-medium transition flex items-center justify-center gap-2 border border-slate-800 cursor-pointer">
+                    <i class="fas fa-arrow-left"></i> 메인화면으로 이동
+                </button>
+            </div>
+        </aside>
+
+        <main class="flex-1 min-w-0 lg:pl-64">
+            
+            <header class="sticky top-0 z-20 bg-slate-950/80 backdrop-blur-md border-b border-slate-900 px-6 py-4 flex items-center justify-between lg:hidden">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 bg-amber-500 rounded-lg flex items-center justify-center text-slate-950 font-black text-md">K</div>
+                    <span class="font-bold text-sm tracking-wider">CHAN'S AXIS</span>
+                </div>
+                <a href="mailto:vlckang@naver.com" class="p-2 text-gray-400 hover:text-amber-400 cursor-pointer">
+                    <i class="fas fa-envelope text-lg"></i>
+                </a>
+            </header>
+
+            <div class="max-w-4xl mx-auto px-4 md:px-8">
+                
+                <section id="intro" class="section-container pt-12">
+                    <div class="text-center md:text-left mb-10" data-aos="fade-up">
+                        <span class="text-amber-500 font-bold tracking-widest text-xs uppercase bg-amber-500/10 px-3 py-1 rounded-full">Research Overview</span>
+                        <h1 class="text-3xl md:text-5xl font-black mt-3 mb-6 tracking-tight leading-tight text-white serif">
+                            융합 연구: 동양철학, 정신분석학,<br class="hidden md:block">그리고 현대 물리학의 축(Axis)
+                        </h1>
+                        <p class="text-gray-400 text-base md:text-lg leading-relaxed max-w-2xl">
+                            본 연구는 주역(I Ching)의 변화 원리, 자크 라캉(Jacques Lacan)의 정신분석학적 무의식 구조, 그리고 양자역학 및 세포생물학의 항상성 메커니즘이 공유하는 하나의 '우주적 물리 축'을 탐구하고 시각화합니다.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12" data-aos="fade-up" data-aos-delay="100">
+                        <div class="bg-slate-900/40 border border-slate-800/60 p-6 rounded-2xl shadow-sm hover:border-amber-500/30 transition duration-300">
+                            <div class="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-500 mb-4 font-bold text-lg">01</div>
+                            <h3 class="font-bold text-base mb-2 text-white">동양철학 (주역)</h3>
+                            <p class="text-gray-400 text-xs leading-relaxed">음양의 순환과 대칭성 붕괴, 그리고 우주 삼라만상의 항상성(Homeostasis) 유지 원리를 설명합니다.</p>
+                        </div>
+                        <div class="bg-slate-900/40 border border-slate-800/60 p-6 rounded-2xl shadow-sm hover:border-amber-500/30 transition duration-300">
+                            <div class="w-10 h-10 rounded-xl bg-indigo-500/10 flex items-center justify-center text-indigo-400 mb-4 font-bold text-lg">02</div>
+                            <h3 class="font-bold text-base mb-2 text-white">정신분석학 (라캉)</h3>
+                            <p class="text-gray-400 text-xs leading-relaxed">상상계, 상징계, 실재계의 삼각 구조를 통해 인간 무의식과 동양 철학적 공(空)의 교차점을 도출합니다.</p>
+                        </div>
+                        <div class="bg-slate-900/40 border border-slate-800/60 p-6 rounded-2xl shadow-sm hover:border-amber-500/30 transition duration-300">
+                            <div class="w-10 h-10 rounded-xl bg-cyan-500/10 flex items-center justify-center text-cyan-400 mb-4 font-bold text-lg">03</div>
+                            <h3 class="font-bold text-base mb-2 text-white">현대물리·생물학</h3>
+                            <p class="text-gray-400 text-xs leading-relaxed">양자 얽힘, 비국소성(Synchronicity) 및 세포 내부의 신호 전달 체계와 피드백 루프를 물리적으로 증명합니다.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="act1" class="section-container">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center" data-aos="fade-right">
+                        <div>
+                            <span class="text-amber-500 font-bold tracking-widest text-xs uppercase mb-2 block">제 1막: 기 (起)</span>
+                            <h2 class="text-2xl md:text-3xl font-bold mb-4 serif text-white">우주의 태동과 항상성</h2>
+                            <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                                만물의 시작은 보이지 않는 에너지의 균형에서 출발합니다. 주역에서 말하는 태극은 현대 물리학의 진공 상태이자 양자 요동의 세계와 맞닿아 있습니다.
+                            </p>
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                세포가 외부 자극에 맞서 내부 상태를 일정하게 유지하려는 항상성(Homeostasis)은, 우주가 끊임없이 변화하면서도 본질적인 질서를 유지하려는 '태극의 운동' 그 자체입니다.
+                            </p>
+                        </div>
+                        <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-6 h-64 flex flex-col justify-between relative overflow-hidden">
+                            <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-amber-500/5 rounded-full filter blur-2xl"></div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-xs text-amber-500 font-mono tracking-wider">EQUILIBRIUM STATE</span>
+                                <i class="fas fa-wave-square text-gray-600"></i>
+                            </div>
+                            <div class="text-4xl font-light text-slate-500 font-mono text-center my-auto">
+                                <i class="fas fa-yin-yang text-amber-500/20 text-6xl animate-spin" style="animation-duration: 20s;"></i>
+                            </div>
+                            <div class="text-xs text-gray-500 text-center">동적 평형 상태 (Dynamic Equilibrium)</div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="act2" class="section-container">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center" data-aos="fade-left">
+                        <div class="order-2 md:order-1 bg-slate-900/60 border border-slate-800 rounded-2xl p-6 h-64 flex flex-col justify-between">
+                            <div class="flex justify-between items-center">
+                                <span class="text-xs text-indigo-400 font-mono tracking-wider">PSYCHOANALYSIS AXIS</span>
+                                <i class="fas fa-project-diagram text-gray-600"></i>
+                            </div>
+                            <div class="space-y-3 my-auto px-4">
+                                <div class="flex justify-between text-xs text-gray-400"><span class="font-medium text-white">상상계 (Imaginary)</span><span>거울 단계 / 오인</span></div>
+                                <div class="w-full bg-slate-950 h-1.5 rounded-full overflow-hidden"><div class="bg-indigo-400 h-full w-3/4"></div></div>
+                                <div class="flex justify-between text-xs text-gray-400"><span class="font-medium text-white">상징계 (Symbolic)</span><span>언어와 질서 / 주역의 괘</span></div>
+                                <div class="w-full bg-slate-950 h-1.5 rounded-full overflow-hidden"><div class="bg-amber-400 h-full w-5/6"></div></div>
+                                <div class="flex justify-between text-xs text-gray-400"><span class="font-medium text-white">실재계 (The Real)</span><span>표현 불가능한 공(空)</span></div>
+                                <div class="w-full bg-slate-950 h-1.5 rounded-full overflow-hidden"><div class="bg-rose-500 h-full w-1/3"></div></div>
+                            </div>
+                        </div>
+                        <div class="order-1 md:order-2">
+                            <span class="text-indigo-400 font-bold tracking-widest text-xs uppercase mb-2 block">제 2막: 승 (承)</span>
+                            <h2 class="text-2xl md:text-3xl font-bold mb-4 serif text-white">라캉의 거울과 상징적 기호</h2>
+                            <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                                인간은 언어라는 상징적 구조 속에 태어납니다. 자크 라캉은 주체를 상징계(Symbolic)적 질서 속에서 파악했습니다. 이는 주역이 세상의 변화를 64괘라는 상징 기호로 기호화한 것과 완벽히 일치합니다.
+                            </p>
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                거울을 통해 자신을 인식하듯, 우리는 상징계를 통해 우주의 물리적 축을 인식하며, 그 너머에 존재하는 도(道)이자 실재계(The Real)를 갈망합니다.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="act3" class="section-container">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center" data-aos="fade-right">
+                        <div>
+                            <span class="text-cyan-400 font-bold tracking-widest text-xs uppercase mb-2 block">제 3막: 전 (轉)</span>
+                            <h2 class="text-2xl md:text-3xl font-bold mb-4 serif text-white">양자 얽힘과 비국소적 동시성</h2>
+                            <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                                현대 양자물리학은 거리에 상관없이 두 입자가 즉각적으로 연결되는 '양자 얽힘(Quantum Entanglement)'을 증명했습니다. 
+                            </p>
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                융(Jung)이 제안하고 주역의 원리에서 영감을 얻은 '동시성(Synchronicity)' 개념은 인과관계가 없음에도 의미 있게 연결되는 비국소적 물리 현상을 철학적으로 대변합니다. 물질과 정신은 동일한 축 위에서 공명합니다.
+                            </p>
+                        </div>
+                        <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-6 h-64 flex flex-col justify-between relative overflow-hidden">
+                            <div class="absolute -left-10 -top-10 w-40 h-40 bg-cyan-500/5 rounded-full filter blur-2xl"></div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-xs text-cyan-400 font-mono tracking-wider">QUANTUM COHERENCE</span>
+                                <i class="fas fa-atom text-gray-600"></i>
+                            </div>
+                            <div class="flex items-center justify-around my-auto">
+                                <div class="w-12 h-12 rounded-full border border-cyan-500/30 flex items-center justify-center animate-pulse"><div class="w-3 h-3 bg-cyan-400 rounded-full shadow-lg shadow-cyan-400/50"></div></div>
+                                <div class="h-px bg-gradient-to-r from-cyan-500 via-transparent to-cyan-500 flex-1 mx-4 relative"><div class="absolute inset-0 bg-cyan-400/20 blur-sm"></div></div>
+                                <div class="w-12 h-12 rounded-full border border-cyan-500/30 flex items-center justify-center animate-pulse"><div class="w-3 h-3 bg-cyan-400 rounded-full shadow-lg shadow-cyan-400/50"></div></div>
+                            </div>
+                            <div class="text-xs text-gray-500 text-center">비국소적 얽힘 (Non-local Entanglement)</div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="conclusion" class="section-container">
+                    <div class="bg-gray-900 text-white rounded-3xl p-8 relative overflow-hidden shadow-xl">
+                        <div class="absolute top-0 right-0 w-64 h-64 bg-amber-500 rounded-full filter blur-3xl opacity-10"></div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center relative z-10">
+                            
+                            <div>
+                                <span class="text-amber-400 font-bold tracking-widest text-sm uppercase mb-2 block" data-key="act4">제 4막: 결 (結)</span>
+                                <h2 class="text-2xl font-bold mb-4 serif text-white" data-key="life_title">삶의 완성: 지극정성</h2>
+                                <p class="text-gray-300 text-sm mb-6 leading-relaxed" data-key="life_desc">
+                                    태양이 만물을 비추듯, 지극정성으로 삶을 대할 때 우리의 삶은 완성됩니다.
+                                </p>
+                                
+                                <div class="grid grid-cols-2 gap-4 mt-6">
+                                    <div onclick="window.open('https://blog.naver.com/vlckang', '_blank')" class="bg-white/10 hover:bg-white/20 p-4 rounded-xl cursor-pointer transition text-center border border-white/10 hover:border-amber-500 group">
+                                        <i class="fas fa-blog text-green-400 mb-2 text-2xl group-hover:scale-110 transition-transform"></i>
+                                        <div class="text-xs font-bold">My Blog</div>
+                                    </div>
+                                    
+                                    <div onclick="window.open('https://blog.naver.com/vlckang/224320940160', '_blank')" class="bg-white/10 hover:bg-white/20 p-4 rounded-xl cursor-pointer transition text-center border border-white/10 hover:border-amber-500 group">
+                                        <i class="fas fa-file-alt text-amber-400 mb-2 text-2xl group-hover:scale-110 transition-transform"></i>
+                                        <div class="text-xs font-bold">Art Seller</div>
+                                    </div>
+                                </div>
+                            </div> 
+
+                            <div class="chart-container w-full flex items-center justify-center" style="height: 250px; min-height: 250px;">
+                                <canvas id="lifeChart" class="w-full h-full"></canvas>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </section>
+
+                <footer class="mt-20 text-center text-gray-400 text-sm pb-10">
+                    &copy; 2026 Chan's Mail; 
+                    <a href="mailto:vlckang@naver.com" class="text-gray-400 hover:text-amber-400 transition-colors duration-200 underline underline-offset-4 cursor-pointer">
+                        vlckang@naver.com
+                    </a>
+                </footer>
+
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Initialize Animations
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+
+        // Initialize Chart.js
+        const ctx = document.getElementById('lifeChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'radar',
+            data: {
+                labels: ['정신 (Spirit)', '항상성 (Homeo)', '동시성 (Synchro)', '에너지 (Energy)', '의식 (Conscious)'],
+                datasets: [{
+                    label: '통합 지표 (Synthesis Axis)',
+                    data: [90, 85, 88, 82, 87],
+                    backgroundColor: 'rgba(245, 158, 11, 0.2)',
+                    borderColor: '#f59e0b',
+                    borderWidth: 2,
+                    pointBackgroundColor: '#f59e0b',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: '#f59e0b'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        angleLines: { color: 'rgba(255,255,255,0.1)' },
+                        grid: { color: 'rgba(255,255,255,0.1)' },
+                        pointLabels: { color: '#94a3b8', font: { size: 11 } },
+                        ticks: { display: false },
+                        suggestedMin: 50,
+                        suggestedMax: 100
+                    }
+                },
+                plugins: {
+                    legend: { display: false }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
