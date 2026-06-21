@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>우주와 나: 변화, 항상성, 그리고 동시성</title>
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* [테마: Warm Zen] */
+        body {
+            margin: 0;
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #fdfbf7; 
+            color: #4a4a4a;
+            overflow-x: hidden;
+        }
+        .serif { font-family: 'Noto Serif KR', serif; }
+
+        /* [레이아웃: 반응형 구조 개선] */
+        @media (min-width: 768px) {
+            body { display: flex; height: 100vh; overflow: hidden; }
+            .sidebar { 
+                position: relative; width: 250px; height: 100%; 
+                transform: translateX(0) !important; display: flex !important; z-index: 50;
+            }
+            .mobile-header { display: none; }
+            .main-content { flex: 1; height: 100vh; overflow-y: auto; scroll-behavior: smooth; }
+            .close-btn { display: none; }
+            .nav-dots { display: flex; }
+        }
+
+        @media (max-width: 767px) {
+            body { display: block; height: auto; }
+            .sidebar {
+                position: fixed; top: 0; left: 0; bottom: 0; width: 260px; height: 100vh;
+                background-color: #f7f7f5; z-index: 1000;
+                transform: translateX(-100%); transition: transform 0.3s ease-in-out;
+                box-shadow: 2px 0 10px rgba(0,0,0,0.1); display: flex; flex-direction: column;
+            }
+            .sidebar.active { transform: translateX(0); }
+            .mobile-header {
+                display: flex; align-items: center; justify-content: space-between;
+                padding: 15px 20px; background: #fdfbf7; border-bottom: 1px solid #e0e0e0;
+                position: sticky; top: 0; z-index: 50;
+            }
+            .main-content { height: auto; padding-top: 0; }
+            .content-wrapper { padding: 20px !important; }
+            .close-btn { display: block; text-align: right; margin-bottom: 20px; cursor: pointer; color: #888; padding-right: 10px; }
+            .nav-dots { display: none; }
+        }
+
+      /* 사이드바 전체 컨테이너 */
+.sidebar { 
+    background-color: #f7f7f5; /* 기존 노션풍 배경색 유지 */
+    padding: 32px 24px;        /* 위아래 및 좌우 여백을 넓혀 시각적 답답함 해소 */
+    border-right: 1px solid #eaeaea; 
+    flex-shrink: 0; 
+    width: 260px;              /* 사이드바의 안정적인 기본 너비 확보 */
+    display: flex;
+    flex-direction: column;
+    gap: 8px;                  /* 메뉴 아이템 간의 기본 흐름 간격 */
+}
+
+/* 프로필 및 상단 타이틀 영역 (크기 확대 및 로고 밸런스 조정) */
+.profile-area { 
+    margin-top: 10px;
+    margin-bottom: 36px;       /* 메뉴와의 간격을 조금 더 넓혀 독립성 확보 */
+    padding-left: 6px; 
+    display: flex;
+    align-items: center;
+    gap: 14px;                 /* 로고와 글자 사이의 최적의 여백 */
+}
+
+/* 새로 추가된 3축 로고 마크 (CSS 애니메이션 효과 포함) */
+.logo-3axis {
+    width: 38px;               /* 타이틀 크기에 맞춘 로고 크기 */
+    height: 38px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+/* 로고의 중심점 */
+.logo-3axis .core {
+    width: 8px;
+    height: 8px;
+    background-color: #d97706;
+    border-radius: 50%;
+    z-index: 2;
+}
+
+/* 3개의 축을 상징하는 교차 궤도 선 */
+.logo-3axis .orbit {
+    position: absolute;
+    width: 100%;
+    height: 32%;
+    border: 2px solid #d97706;
+    border-radius: 50%;
+    opacity: 0.85;
+}
+.logo-3axis .orbit:nth-child(1) { transform: rotate(0deg); }
+.logo-3axis .orbit:nth-child(2) { transform: rotate(60deg); }
+.logo-3axis .orbit:nth-child(3) { transform: rotate(120deg); }
+
+/* '3축' 텍스트 스타일 변형 (더 크게, 더 선명하게) */
+.profile-area .title-text {
+    font-size: 1.65rem;        /* 기존 1.35rem에서 대폭 확대하여 시각적 존재감 부여 */
+    font-weight: 800;          /* 가장 두꺼운 자중으로 변경하여 묵직한 안정감 제공 */
+    color: #d97706;            /* 메인 오렌지 컬러 상속 */
+    letter-spacing: -0.03em;   /* 자간을 살짝 좁혀 타이포그래피의 완성도를 높임 */
+    line-height: 1;
+}
+
+/* 개별 메뉴 아이템 (기, 승, 전, 결, Q&A) */
+.menu-item {
+    padding: 10px 14px;        /* 좌우 여백을 넓혀 안정적인 사각형 형태 유지 */
+    cursor: pointer; 
+    border-radius: 8px;        /* 부드러운 라운딩 효과 */
+    color: #4a4a4a;            /* 텍스트 가독성을 높인 짙은 그레이 */
+    font-size: 1.1rem;         /* 본문과 균형을 이루는 최적의 크기 */
+    font-weight: 500;          /* 중중간 정도의 깔끔한 굵기 */
+    line-height: 1.5;
+    transition: all 0.2s ease-in-out; 
+    display: flex; 
+    align-items: center; 
+    margin-bottom: 4px;        /* 아이템 간의 간격 균형 */
+}
+
+/* 메뉴 아이템 내 아이콘 스타일 (홈, 공유, 발자국, 체크, 이메일 등) */
+.menu-item i { 
+    margin-right: 14px;        /* 이미지처럼 아이콘과 텍스트 사이를 충분히 확보 */
+    font-size: 1.25rem;        /* 아이콘이 텍스트보다 살짝 크게 보여 시각적 안정감 부여 */
+    color: #555555;            /* 기본 아이콘 색상 */
+    width: 24px;               /* 정렬이 흐트러지지 않도록 고정 폭 설정 */
+    text-align: center; 
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 마우스 호버(Hover) 시 스타일 */
+.menu-item:hover { 
+    background-color: #efefe9; /* 배경과 결이 같은 자연스러운 그레이-베이지 톤 호버 */
+    color: #d97706;            /* 호버 시 텍스트가 오렌지색으로 변경 */
+}
+
+/* 호버 시 아이콘도 함께 색상이 변하도록 연동 */
+.menu-item:hover i {
+    color: #d97706;
+}
+
+        /* 메인 콘텐츠 영역 */
+        .content-wrapper { max-width: 900px; margin: 0 auto; padding: 40px 40px 100px 40px; }
+        .section-container { min-height: 80vh; padding: 2rem 0; display: flex; flex-direction: column; justify-content: center; }
+
+        /* 카드 & 인터랙션 요소 균형 강화 */
+        .card-shadow { 
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.03); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); background: white; border: 1px solid #f1f1ee;
+        }
+        .card-shadow:hover { transform: translateY(-4px); box-shadow: 0 12px 20px -3px rgba(217, 119, 6, 0.1); border-color: #d97706; }
+        
+        .highlight-text { 
+            background: linear-gradient(120deg, #fef3c7 0%, #fef3c7 100%); 
+            background-size: 100% 40%; background-position: 0 88%; background-repeat: no-repeat; 
+        }
+
+        /* 차트 컨테이너 */
+        .chart-container { position: relative; width: 100%; height: 300px; margin: 0 auto; }
+
+        /* 다국어 버튼 UI 개선 (시각적 구분 명확화) */
+        .lang-switch { position: absolute; top: 20px; right: 20px; z-index: 40; display: flex; gap: 6px; }
+        @media (max-width: 767px) { .lang-switch { top: 75px; right: 20px; } }
+        .lang-btn {
+            background: #ffffff; border: 1px solid #cbd5e1; padding: 6px 12px;
+            cursor: pointer; border-radius: 6px; font-size: 0.8rem; font-weight: 600; color: #475569;
+            transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        .lang-btn:hover, .lang-btn.active { background: #d97706; color: white; border-color: #d97706; transform: translateY(-1px); }
+
+        /* 우측 플로팅 내비게이션 (PC용) */
+        .nav-dots {
+            position: fixed; right: 25px; top: 50%; transform: translateY(-50%);
+            flex-direction: column; gap: 12px; z-index: 40;
+        }
+        .nav-dot {
+            width: 12px; height: 12px; border-radius: 50%; 
+            background-color: #cbd5e1; cursor: pointer; transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        .nav-dot.active { background-color: #d97706; transform: scale(1.2); border-color: #fef3c7; }
+
+        /* Q&A Box */
+        .qa-box { background: white; padding: 30px; border-radius: 15px; margin-top: 60px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); border: 1px solid #f1f1ee; }
+    </style>
+</head>
+<body>
+
+    <header class="mobile-header">
+        <div class="font-bold text-lg text-amber-700 serif"><i class="fas fa-atom"></i> 우주와 나</div>
+        <button onclick="toggleSidebar()" class="text-gray-600 text-2xl focus:outline-none" aria-label="메뉴 열기"><i class="fas fa-bars"></i></button>
+    </header>
+
+    <aside class="sidebar" id="sidebar">
+        <div class="close-btn" onclick="toggleSidebar()"><i class="fas fa-times fa-lg"></i></div>
+        <div class="profile-area">
+    <div class="logo-3axis">
+        <div class="orbit"></div>
+        <div class="orbit"></div>
+        <div class="orbit"></div>
+        <div class="core"></div>
+    </div>
+    <span class="title-text">3 축</span>
+</div>
+        <nav>
+            <div class="menu-item" onclick="scrollToId('intro')"><i class="fas fa-home"></i> <span data-key="menu_intro">기 (起): 개념</span></div>
+            <div class="menu-item" onclick="scrollToId('development')"><i class="fas fa-project-diagram"></i> <span data-key="menu_dev">승 (承): 통합</span></div>
+            <div class="menu-item" onclick="scrollToId('twist')"><i class="fas fa-shoe-prints"></i> <span data-key="menu_twist">전 (轉): 실천</span></div>
+            <div class="menu-item" onclick="scrollToId('conclusion')"><i class="fas fa-check-circle"></i> <span data-key="menu_conc">결 (結): 완성</span></div>
+            <div class="menu-item" onclick="scrollToId('qna-area')"><i class="fas fa-envelope"></i> <span data-key="menu_qna">Q&A</span></div>
+        </nav>
+        <div class="mt-auto text-xs text-gray-400 pt-10 md:hidden">Touch outside to close.</div>
+    </aside>
+
+    <div class="nav-dots">
+        <div class="nav-dot active" onclick="scrollToId('intro')" title="Intro"></div>
+        <div class="nav-dot" onclick="scrollToId('development')" title="Development"></div>
+        <div class="nav-dot" onclick="scrollToId('twist')" title="Twist"></div>
+        <div class="nav-dot" onclick="scrollToId('conclusion')" title="Conclusion"></div>
+    </div>
+
+    <div id="overlay" onclick="toggleSidebar()" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden transition-opacity opacity-0"></div>
+
+    <main class="main-content" id="main-content-stream">
+        <div class="lang-switch">
+            <button class="lang-btn active" onclick="changeLang('ko', this)">KR</button>
+            <button class="lang-btn" onclick="changeLang('en', this)">EN</button>
+            <button class="lang-btn" onclick="changeLang('jp', this)">JP</button>
+            <button class="lang-btn" onclick="changeLang('es', this)">ES</button>
+            <button class="lang-btn" onclick="changeLang('cn', this)">CN</button>
+        </div>
+
+        <div class="content-wrapper">
+            
+            <section id="intro" class="section-container">
+                <div class="text-center mb-12">
+                    <span class="text-amber-600 font-bold tracking-widest text-sm uppercase mb-2 block" data-key="act1">제 1막: 기 (起)</span>
+                    <h1 class="text-3xl md:text-5xl font-bold mb-6 text-gray-800 leading-tight serif" data-key="title_main">정명화(正名化)<br></h1>
+                    <p class="text-base md:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed px-2" data-key="main_desc">
+                        우주 변화의 원리를 이해하기 위해 가장 먼저 선행되어야 할 것은 용어의 올바른 정의다. <br>
+                        변화, 항상성, 동시성. 이 세 가지 열쇠를 쥐어야 문이 열린다.
+                    </p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="card-shadow p-6 rounded-xl cursor-pointer group flex flex-col justify-between" onclick="toggleCard('def-change')">
+                        <div>
+                            <div class="text-center mb-4 text-3xl">🌊</div>
+                            <h3 class="text-xl font-bold text-center mb-2 group-hover:text-amber-600 transition-colors" data-key="card_change">변화  (Change)</h3>
+                            <div id="def-change" class="text-gray-600 text-sm text-center hidden p-3 mt-2 bg-amber-50/50 rounded-lg transition-all" data-key="desc_change">우주 만물은 멈춰있지 않고 끊임없이 흐릅니다. 고정된 실체가 아닌 흐름 그 자체를 인식하는 것입니다.</div>
+                        </div>
+                        <div class="text-center text-xs text-amber-500 mt-4 font-medium" data-key="click_view">Click to View</div>
+                    </div>
+                    <div class="card-shadow p-6 rounded-xl cursor-pointer group flex flex-col justify-between" onclick="toggleCard('def-const')">
+                        <div>
+                            <div class="text-center mb-4 text-3xl">☀️</div>
+                            <h3 class="text-xl font-bold text-center mb-2 group-hover:text-amber-600 transition-colors" data-key="card_const">항상성 (Homeostasis)</h3>
+                            <div id="def-const" class="text-gray-600 text-sm text-center hidden p-3 mt-2 bg-amber-50/50 rounded-lg transition-all" data-key="desc_const">변하지 않는 마음, 한결같은 성실함입니다. 태양이 만물을 차별 없이 비추듯 내면을 지탱하는 빛입니다.</div>
+                        </div>
+                        <div class="text-center text-xs text-amber-500 mt-4 font-medium" data-key="click_view">Click to View</div>
+                    </div>
+                    <div class="card-shadow p-6 rounded-xl cursor-pointer group flex flex-col justify-between" onclick="toggleCard('def-sync')">
+                        <div>
+                            <div class="text-center mb-4 text-3xl">🌌</div>
+                            <h3 class="text-xl font-bold text-center mb-2 group-hover:text-amber-600 transition-colors" data-key="card_sync">동시성 (Synchronicity)</h3>
+                            <div id="def-sync" class="text-gray-600 text-sm text-center hidden p-3 mt-2 bg-amber-50/50 rounded-lg transition-all" data-key="desc_sync">시간과 공간이 분리된 것이 아니라 하나로 연결된 상태. 입자이자 파동인 태극의 상태입니다.</div>
+                        </div>
+                        <div class="text-center text-xs text-amber-500 mt-4 font-medium" data-key="click_view">Click to View</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="development" class="section-container">
+                <div class="bg-white rounded-3xl p-6 md:p-12 shadow-sm border border-gray-100">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                        <div class="order-2 lg:order-1">
+                            <span class="text-amber-600 font-bold tracking-widest text-sm uppercase mb-2 block" data-key="act2">제 2막: 승 (承)</span>
+                            <h2 class="text-2xl md:text-3xl font-bold mb-4 serif" data-key="chart_title">이분법 종말 통합</h2>
+                            <p class="text-gray-600 mb-6 text-sm leading-relaxed" data-key="chart_desc">
+                                오랫동안 우리는 세상을 '이것 아니면 저것'으로 나누어 보았습니다. 하지만 양자역학은 입자와 파동이 분리된 것이 아님을 증명했습니다.
+                            </p>
+                            <div class="flex space-x-3 mt-4 justify-center lg:justify-start">
+                                <button id="btn-dualism" class="px-5 py-2.5 bg-amber-600 text-white rounded-lg text-sm font-medium hover:bg-amber-700 cursor-pointer transition shadow-sm" onclick="updateChart('dualism')" data-key="btn_dual">이분법 (분리)</button>
+                                <button id="btn-sync" class="px-5 py-2.5 bg-gray-200 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-300 cursor-pointer transition" onclick="updateChart('sync')" data-key="btn_sync">동시성 (통합)</button>
+                            </div>
+                            <p id="chart-caption" class="text-xs text-gray-500 mt-4 text-center lg:text-left font-medium" data-key="caption_dual">현재: 분리된 관점 (입자와 파동)</p>
+                        </div>
+                        <div class="order-1 lg:order-2 bg-gray-50 rounded-xl p-2 md:p-4">
+                            <div class="chart-container"><canvas id="dualityChart"></canvas></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="twist" class="section-container">
+                <div class="text-center mb-10">
+                    <span class="text-amber-600 font-bold tracking-widest text-sm uppercase mb-2 block" data-key="act3">제 3막: 전 (轉)</span>
+                    <h2 class="text-2xl md:text-3xl font-bold mb-4 serif" data-key="practice_title">자각에서 실천으로</h2>
+                    <p class="text-gray-600 text-sm md:text-base max-w-xl mx-auto" data-key="practice_desc">
+                        변화와 동시성은 우주의 원리지만, 항상성은 우리 몫입니다.
+                    </p>
+                </div>
+                
+                <div class="space-y-6">
+                    <div class="bg-white p-5 rounded-xl border-l-4 border-gray-300 shadow-sm card-shadow">
+                        <h3 class="font-bold text-lg" data-key="step1">1단계: 정명화 (正名化)</h3>
+                        <p class="text-sm text-gray-600 mt-1" data-key="step1_desc">개념을 바르게 세우다. '그리기 명상'은 이를 내면화하는 도구입니다.</p>
+                    </div>
+                    <div class="bg-white p-5 rounded-xl border-l-4 border-amber-400 shadow-sm card-shadow">
+                        <h3 class="font-bold text-lg" data-key="step2">2단계: 자각 (自覺)</h3>
+                        <p class="text-sm text-gray-600 mt-1" data-key="step2_desc">머리가 아닌 가슴으로 원리를 받아들이는 단계입니다.</p>
+                    </div>
+                    <div class="bg-white p-5 rounded-xl border-l-4 border-amber-600 shadow-md card-shadow">
+                        <h3 class="font-bold text-lg text-amber-800" data-key="step3">3단계: 지행합일 (知行合一)</h3>
+                        <p class="text-sm text-gray-600 mt-1" data-key="step3_desc">앎과 삶이 하나되는 신명(神明)나는 실천의 삶입니다.</p>
+                    </div>
+                </div>
+            </section>
+
+           <section id="conclusion" class="section-container">
+    <div class="bg-gray-900 text-white rounded-3xl p-8 relative overflow-hidden shadow-xl">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-amber-500 rounded-full filter blur-3xl opacity-10"></div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center relative z-10">
+            
+            <div>
+                <span class="text-amber-400 font-bold tracking-widest text-sm uppercase mb-2 block" data-key="act4">제 4막: 결 (結)</span>
+                <h2 class="text-2xl font-bold mb-4 serif text-white" data-key="life_title">삶의 완성: 지극정성</h2>
+                <p class="text-gray-300 text-sm mb-6 leading-relaxed" data-key="life_desc">
+                    태양이 만물을 비추듯, 지극정성으로 삶을 대할 때 우리의 삶은 완성됩니다.
+                </p>
+                
+                <div class="grid grid-cols-2 gap-4 mt-6">
+                    <div onclick="window.open('https://blog.naver.com/vlckang', '_blank')" class="bg-white/10 hover:bg-white/20 p-4 rounded-xl cursor-pointer transition text-center border border-white/10 hover:border-amber-500 group">
+                        <i class="fas fa-blog text-green-400 mb-2 text-2xl group-hover:scale-110 transition-transform"></i>
+                        <div class="text-xs font-bold">My Blog</div>
+                    </div>
+                    
+                    <div onclick="window.open('https://blog.naver.com/vlckang/224320940160', '_blank')" class="bg-white/10 hover:bg-white/20 p-4 rounded-xl cursor-pointer transition text-center border border-white/10 hover:border-amber-500 group">
+                        <i class="fas fa-file-alt text-amber-400 mb-2 text-2xl group-hover:scale-110 transition-transform"></i>
+                        <div class="text-xs font-bold">Art Seller</div>
+                    </div>
+                </div>
+            </div> <div class="chart-container w-full flex items-center justify-center" style="height: 250px; min-height: 250px;">
+                <canvas id="lifeChart" class="w-full h-full"></canvas>
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+           <section id="qna-area" class="qa-box">
+    <h3 class="text-xl font-bold mb-2" data-key="qna_title">질문과 토론</h3>
+    <p class="text-sm text-gray-500 mb-4" data-key="qna_info">
+        아래 버튼을 누르면 <b>네이버 메일 쓰기 화면</b>으로 연결됩니다.<br>
+        (수신인: <span class="font-semibold text-amber-700">vlckang@naver.com</span>)
+    </p>
+    
+    <textarea id="qna-content" class="w-full p-4 border border-gray-200 rounded-xl resize-none focus:outline-none focus:ring-2 focus:ring-amber-500 text-sm bg-gray-50 transition-all" rows="4" placeholder="작성하신 내용을 복사(Ctrl+C)한 후 아래 버튼을 눌러 메일 본문에 붙여넣어주세요..."></textarea>
+    
+    <div class="flex flex-col md:flex-row gap-3 mt-4">
+        <button id="btn-sendEmail" class="w-full md:flex-1 px-8 py-3.5 bg-amber-600 text-white rounded-xl font-bold hover:bg-amber-700 cursor-pointer transition shadow-md flex items-center justify-center gap-2">
+            <i class="fas fa-envelope text-sm"></i> <span>네이버 메일로 보내기</span>
+        </button>
+        
+        <button id="btn-copyEmail" class="w-full md:w-auto px-6 py-3.5 bg-gray-200 text-gray-700 rounded-xl font-semibold hover:bg-gray-300 cursor-pointer transition flex items-center justify-center gap-2" onclick="copyEmailAddress()">
+            <i class="fas fa-copy text-sm"></i> <span>이메일 주소 복사</span>
+        </button>
+    </div>
+</section>
+<!-- ================= [댓글 및 토론 아코디언 섹션] ================= -->
+<div class="comments-accordion-wrapper" style="max-width: 800px; margin: 40px auto; padding: 0 20px; font-family: 'Noto Sans KR', sans-serif;">
+  
+  <!-- 댓글 토글 버튼 -->
+  <button id="toggle-comments-btn" onclick="toggleComments()" style="
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 24px;
+    background-color: #f7f7f5;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    color: #4a4a4a;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease-in-out;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+  " onmouseover="this.style.borderColor='#d97706'; this.style.color='#d97706'; this.style.backgroundColor='#efefe9';" 
+     onmouseout="this.style.borderColor='#e0e0e0'; this.style.color='#4a4a4a'; this.style.backgroundColor='#f7f7f5';">
+    
+    <span style="display: flex; align-items: center; gap: 8px;">
+      <i class="fa-regular fa-comments" style="font-size: 1.2rem;"></i>
+      <span>댓글과 토론 열기 / 접기</span>
+    </span>
+    <!-- 최하단 Home 이동 버튼 -->
+<div style="max-width: 800px; margin: 30px auto 50px auto; padding: 0 20px; display: flex; justify-content: center;">
+  <a href="https://chan-61.github.io/kchan/" style="
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 28px;
+    background-color: #d97706; /* 메인 앰버 포인트 컬러 */
+    border: 1px solid #d97706;
+    border-radius: 30px;
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.25s ease-in-out;
+    box-shadow: 0 4px 6px rgba(217, 119, 6, 0.15);
+  " onmouseover="this.style.backgroundColor='#b45309'; this.style.borderColor='#b45309'; this.style.transform='translateY(-2px)';" 
+     onmouseout="this.style.backgroundColor='#d97706'; this.style.borderColor='#d97706'; this.style.transform='translateY(0)';">
+    <i class="fa-solid fa-house-chimney"></i>
+    <span>처음으로 (Home)</span>
+  </a>
+</div>
+
+    <!-- 화살표 아이콘 -->
+    <i id="accordion-arrow" class="fa-solid fa-chevron-down" style="
+      transition: transform 0.3s ease;
+      color: #999;
+    "></i>
+  </button>
+
+  <!-- 댓글 콘텐츠 영역 (초기 상태: 숨김) -->
+  <div id="comments-content-area" style="
+    display: none;
+    margin-top: 16px;
+    padding: 20px;
+    border: 1px solid #f1f1ee;
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  ">
+    <!-- Utterances 댓글 위젯 로드 -->
+    <script src="https://utteranc.es/client.js"
+            repo="chan-61/kchan"
+            issue-term="pathname"
+            label="Comment"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+  </div>
+</div>
+
+<!-- 아코디언 제어 스크립트 -->
+<script>
+  function toggleComments() {
+    const contentArea = document.getElementById('comments-content-area');
+    const arrow = document.getElementById('accordion-arrow');
+    
+    if (contentArea.style.display === 'none' || contentArea.style.display === '') {
+      // 열기
+      contentArea.style.display = 'block';
+      arrow.style.transform = 'rotate(180deg)';
+      arrow.style.color = '#d97706';
+    } else {
+      // 닫기
+      contentArea.style.display = 'none';
+      arrow.style.transform = 'rotate(0deg)';
+      arrow.style.color = '#999';
+    }
+  }
+</script>
+<!-- ============================================================= -->
+
+
+            <footer class="mt-20 text-center text-gray-400 text-sm pb-10">
+    &copy; 2026 Chan's Mail; 
+    <a href="mailto:vlckang@naver.com" class="text-gray-400 hover:text-amber-400 transition-colors duration-200 underline underline-offset-4 cursor-pointer">
+        vlckang@naver.com
+    </a>
+</footer>
+
+        </div>
+    </main>
+
+    <script>
+        // [1] UI 로직: 사이드바 및 스크롤 바인딩 디바이스 뷰포트 통합 검토완료
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            sidebar.classList.toggle('active');
+            if (sidebar.classList.contains('active')) {
+                overlay.classList.remove('hidden');
+                setTimeout(() => overlay.classList.remove('opacity-0'), 10);
+            } else {
+                overlay.classList.add('opacity-0');
+                setTimeout(() => overlay.classList.add('hidden'), 300);
+            }
+        }
+
+        function scrollToId(id) {
+            const targetElement = document.getElementById(id);
+            // 데스크톱 환경에서는 main-content 스크롤 스트림 제어, 모바일은 window 제어
+            if (window.innerWidth >= 768) {
+                document.getElementById('main-content-stream').scrollTo({
+                    top: targetElement.offsetTop - 20,
+                    behavior: 'smooth'
+                });
+            } else {
+                targetElement.scrollIntoView({ behavior: 'smooth' });
+                toggleSidebar();
+            }
+        }
+
+        // Card 열기/닫기 토글 독립성 기능수정 검토완료 (다시 클릭 시 완전히 닫히도록 개선)
+        function toggleCard(id) {
+            const el = document.getElementById(id);
+            const isHidden = el.classList.contains('hidden');
+            
+            ['def-change', 'def-const', 'def-sync'].forEach(cid => {
+                document.getElementById(cid).classList.add('hidden');
+            });
+            
+            if (isHidden) {
+                el.classList.remove('hidden');
+            }
+        }
+
+        // 데스크톱 및 모바일 통합 스크롤 감지 센서 (Scroll Spy) 수정
+        const scrollTarget = window.innerWidth >= 768 ? document.getElementById('main-content-stream') : window;
+        scrollTarget.addEventListener('scroll', () => {
+            const sections = ['intro', 'development', 'twist', 'conclusion'];
+            const dots = document.querySelectorAll('.nav-dot');
+            let current = 'intro';
+            
+            const scrollTop = window.innerWidth >= 768 ? document.getElementById('main-content-stream').scrollTop : window.scrollY;
+
+            sections.forEach(section => {
+                const element = document.getElementById(section);
+                if (scrollTop >= element.offsetTop - 250) {
+                    current = section;
+                }
+            });
+
+            dots.forEach(dot => {
+                dot.classList.remove('active');
+                if (dot.getAttribute('onclick').includes(current)) dot.classList.add('active');
+            });
+        });
+
+       document.addEventListener("DOMContentLoaded", function() {
+    const sendButton = document.getElementById('btn-sendEmail');
+    if (sendButton) {
+        sendButton.addEventListener('click', sendEmail);
+    }
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+    const sendButton = document.getElementById('btn-sendEmail');
+    if (sendButton) {
+        sendButton.addEventListener('click', sendViaNaverMail);
+    }
+});
+
+// 차선책: 네이버 메일 쓰기 링크로 바로 연결
+function sendViaNaverMail() {
+    const myEmail = "vlckang@naver.com";
+    
+    // 네이버 메일 '받는 사람' 파라미터가 포함된 웹 링크 URL
+    // 사용자가 네이버 로그인 상태라면 바로 메일 쓰기 창이 열리며 수신인에 이메일이 입력됩니다.
+    const naverMailUrl = `https://mail.naver.com/?v=write&to=${myEmail}`;
+    
+    // 새 창(새 탭)으로 네이버 메일 열기
+    window.open(naverMailUrl, '_blank');
+}
+
+// 보조 기능: 이메일 주소 클립보드 복사
+function copyEmailAddress() {
+    const myEmail = "vlckang@naver.com";
+    
+    navigator.clipboard.writeText(myEmail).then(() => {
+        alert("이메일 주소(vlckang@naver.com)가 복사되었습니다.\n메일 앱에서 받는 사람에 붙여넣기(Ctrl+V) 하세요.");
+    }).catch(err => {
+        // 구형 브라우저 대응용 fallback
+        const t = document.createElement("textarea");
+        document.body.appendChild(t);
+        t.value = myEmail;
+        t.select();
+        document.execCommand('copy');
+        document.body.removeChild(t);
+        alert("이메일 주소가 복사되었습니다.");
+    });
+}
+        // [3] 차트 인스턴스 핸들러 및 피드백 수정
+        let dualityChartInstance = null;
+        
+        window.addEventListener('DOMContentLoaded', () => {
+            const ctx1 = document.getElementById('dualityChart').getContext('2d');
+            dualityChartInstance = new Chart(ctx1, {
+                type: 'bar',
+                data: {
+                    labels: ['A', 'B', 'C', 'D', 'E'],
+                    datasets: [
+                        { type: 'bar', label: '입자 (양)', data: [10, 8, 12, 5, 9], backgroundColor: 'rgba(59, 130, 246, 0.6)' },
+                        { type: 'line', label: '파동 (음)', data: [2, 15, 4, 12, 6], borderColor: 'rgb(239, 68, 68)', borderWidth: 2, tension: 0.2 }
+                    ]
+                },
+                options: { 
+                    responsive: true, maintainAspectRatio: false, 
+                    plugins: { legend: { position: 'bottom', labels: { boxWidth: 12 } } }, 
+                    scales: { y: { display: false }, x: { grid: { display: false } } } 
+                }
+            });
+
+            const ctx2 = document.getElementById('lifeChart').getContext('2d');
+            new Chart(ctx2, {
+                type: 'radar',
+                data: {
+                    labels: ['정명화', '자각', '지행합일', '항상심', '신명'],
+                    datasets: [{
+                        label: 'Harmony',
+                        data: [85, 90, 95, 95, 100],
+                        fill: true,
+                        backgroundColor: 'rgba(245, 158, 11, 0.2)',
+                        borderColor: 'rgb(245, 158, 11)',
+                        pointBackgroundColor: '#fff',
+                        pointBorderColor: 'rgb(245, 158, 11)'
+                    }]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false, 
+                    plugins: { legend: { display: false } },
+                    scales: { r: { angleLines: { color: 'rgba(255,255,255,0.2)' }, grid: { color: 'rgba(255,255,255,0.2)' }, pointLabels: { color: '#fff', font: { size: 11 } } } }
+                }
+            });
+        });
+
+        // 차트 모드 전환 시 클래스 제어 안정성 확보 기법 전개
+        function updateChart(mode) {
+            const caption = document.getElementById('chart-caption');
+            const btnDual = document.getElementById('btn-dualism');
+            const btnSync = document.getElementById('btn-sync');
+
+            // 토글 시 활성화 버튼 시각적 분별 피드백 로직 고도화
+            if (mode === 'dualism') {
+                dualityChartInstance.data.datasets = [
+                    { type: 'bar', label: '입자 (양)', data: [10, 8, 12, 5, 9], backgroundColor: 'rgba(59, 130, 246, 0.6)' },
+                    { type: 'line', label: '파동 (음)', data: [2, 15, 4, 12, 6], borderColor: 'rgb(239, 68, 68)', borderWidth: 2 }
+                ];
+                caption.innerText = currentLang === 'ko' ? "현재: 분리된 관점 (입자와 파동)" : langData[currentLang]['caption_dual'];
+                
+                btnDual.className = "px-5 py-2.5 bg-amber-600 text-white rounded-lg text-sm font-medium hover:bg-amber-700 cursor-pointer transition shadow-sm";
+                btnSync.className = "px-5 py-2.5 bg-gray-200 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-300 cursor-pointer transition";
+            } else {
+                dualityChartInstance.data.datasets = [{
+                    type: 'line', label: '통합된 에너지', data: [12, 18, 16, 17, 15],
+                    backgroundColor: 'rgba(139, 92, 246, 0.2)', borderColor: 'rgb(139, 92, 246)', borderWidth: 3, fill: true, tension: 0.4
+                }];
+                caption.innerText = currentLang === 'ko' ? "현재: 동시성 (통합된 에너지)" : langData[currentLang]['caption_sync'];
+                
+                btnDual.className = "px-5 py-2.5 bg-gray-200 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-300 cursor-pointer transition";
+                btnSync.className = "px-5 py-2.5 bg-amber-600 text-white rounded-lg text-sm font-medium hover:bg-amber-700 cursor-pointer transition shadow-sm";
+            }
+            dualityChartInstance.update();
+        }
+
+        // [4] i18n 완전 전개 모델 구성 (기존 코드 누락 텍스트 번역 완벽 커버)
+        let currentLang = 'ko';
+        const langData = {
+            ko: {
+                menu_intro: "기 (起): 개념", menu_dev: "승 (承): 통합", menu_twist: "전 (轉): 실천", menu_conc: "결 (結): 완성", menu_qna: "Q&A",
+                act1: "제 1막: 기 (起)", title_main: "정명화(正名化): 개념 잡기",
+                main_desc: "우주 변화의 원리를 이해하기 위해 가장 먼저 선행되어야 할 것은 용어의 올바른 정의다. 변화, 항상성, 동시성. 이 세 가지 열쇠를 쥐어야 문이 열린다.",
+                card_change: "변화 (Change)", card_const: "항상성 (Consistency)", card_sync: "동시성 (Synchronicity)",
+                desc_change: "우주 만물은 멈춰있지 않고 끊임없이 흐릅니다. 고정된 실체가 아닌 흐름 그 자체를 인식하는 것입니다.",
+                desc_const: "변하지 않는 마음, 한결같은 성실함입니다. 태양이 만물을 차별 없이 비추듯 내면을 지탱하는 빛입니다.",
+                desc_sync: "시간과 공간이 분리된 것이 아니라 하나로 연결된 상태. 입자이자 파동인 태극의 상태입니다.",
+                click_view: "클릭하여 보기",
+                act2: "제 2막: 승 (承)", chart_title: "이분법의 종말과 통합", chart_desc: "양자역학은 입자와 파동이 분리된 것이 아님을 증명했습니다.",
+                btn_dual: "이분법 (분리)", btn_sync: "동시성 (통합)", caption_dual: "현재: 분리된 관점 (입자와 파동)", caption_sync: "현재: 동시성 (통합된 에너지)",
+                act3: "제 3막: 전 (轉)", practice_title: "자각에서 실천으로", practice_desc: "변화와 동시성은 우주의 원리지만, 항상성은 우리 몫입니다.",
+                step1: "1단계: 정명화 (正名化)", step1_desc: "개념을 바르게 세우다. '그리기 명상'은 이를 내면화하는 도구입니다.",
+                step2: "2단계: 자각 (自覺)", step2_desc: "머리가 아닌 가슴으로 원리를 받아들이는 단계입니다.",
+                step3: "3단계: 지행합일 (知行合一)", step3_desc: "앎과 삶이 하나되는 신명(神明)나는 실천의 삶입니다.",
+                act4: "제 4막: 결 (結)", life_title: "삶의 완성: 지극정성", life_desc: "태양이 만물을 비추듯, 지극정성으로 삶을 대할 때 우리의 삶은 완성됩니다.",
+                qna_title: "질문과 토론", qna_info: "작성하신 내용은 이메일 클라이언트를 통해 작성자에게 바로 전송됩니다.", btn_send: "보내기"
+            },
+            en: {
+                menu_intro: "Intro: Concept", menu_dev: "Dev: Integration", menu_twist: "Twist: Action", menu_conc: "Conclusion", menu_qna: "Q&A",
+                act1: "Act 1: Intro", title_main: "Rectification of Names:<br>Concepts",
+                main_desc: "To understand the universe's principle of change, precise terminology is critical. Change, Consistency, and Synchronicity are the three ultimate keys.",
+                card_change: "Change", card_const: "Consistency", card_sync: "Synchronicity",
+                desc_change: "Everything in the universe flows endlessly. It is the recognition of flow itself rather than fixed substance.",
+                desc_const: "An unchanging heart and consistent sincerity. It is the light supporting your inner center just as the sun shines unconditionally.",
+                desc_sync: "A state where space and time are interconnected as one. The ultimate state of Taiji, being both a particle and a wave.",
+                click_view: "Click to View",
+                act2: "Act 2: Dev", chart_title: "The End of Dualism", chart_desc: "Quantum mechanics proved that particles and waves are essentially one unified entity.",
+                btn_dual: "Dualism (Separate)", btn_sync: "Synchronicity (Unified)", caption_dual: "Current: Separated View (Particle & Wave)", caption_sync: "Current: Synchronicity (Unified Energy)",
+                act3: "Act 3: Twist", practice_title: "From Awareness to Action", practice_desc: "While Change and Synchronicity are cosmic principles, Consistency belongs to our devotion.",
+                step1: "Step 1: Definition", step1_desc: "Establishing proper terms. 'Drawing Meditation' acts as a tool to internalize this.",
+                step2: "Step 2: Awakening", step2_desc: "Accepting cosmic principles with your heart, not just intellectually.",
+                step3: "Step 3: Action Unity", step3_desc: "A life of divine action where knowledge and everyday life become entirely unified.",
+                act4: "Act 4: Conclusion", life_title: "Completion of Life: Sincerity", life_desc: "Just as the sun illuminates everything, our life reaches completion when treated with absolute sincerity.",
+                qna_title: "Q&A & Discussion", qna_info: "Your messages will be forwarded straight to the author via your email client.", btn_send: "Send"
+            },
+            jp: {
+                menu_intro: "起: 概念", menu_dev: "承: 統合", menu_twist: "転: 実践", menu_conc: "結: 完成", menu_qna: "Q&A",
+                act1: "第1幕: 起", title_main: "正名化: 概念の確立",
+                main_desc: "宇宙の変化の原理を理解するために、まず言葉の正しい定義が必要です。変化、恒常性、同時性。この三つの鍵を持つべきです。",
+                card_change: "変化 (Change)", card_const: "恒常性 (Consistency)", card_sync: "同時性 (Synchronicity)",
+                desc_change: "宇宙の万物は止まることなく、絶えず流れています。固定された実体ではなく、流れそのものを認識することです。",
+                desc_const: "変わらない心、一貫した誠実さです。太陽が万物を差別なく照らすように、内面を支える光です。",
+                desc_sync: "時間と空間が分離されているのではなく、一つに繋がっている状態。粒子であり波動である太極の状態です。",
+                click_view: "クリックして表示",
+                act2: "第2幕: 承", chart_title: "二分法の終焉と統合", chart_desc: "量子力学は、粒子と波動が分離されたものではないことを証明しました。",
+                btn_dual: "二分法 (分離)", btn_sync: "同時性 (統合)", caption_dual: "現在: 分離された視点 (粒子と波動)", caption_sync: "現在: 同時性 (統合されたエネルギー)",
+                act3: "第3幕: 転", practice_title: "自覚から実践へ", practice_desc: "変化と同時性は宇宙の原理ですが、恒常性は私たちの役割です。",
+                step1: "1段階: 正名化", step1_desc: "概念を正しく立てる。「描く瞑想」はこれを内面化する道具です。",
+                step2: "2段階: 自覚", step2_desc: "頭ではなく心で原理を受け入れる段階です。",
+                step3: "3段階: 知行合一", step3_desc: "知識と生が一つになる、神明（シンミョン）溢れる実践の生です。",
+                act4: "第4幕: 結", life_title: "生の完成: 至極精誠", life_desc: "太陽が万物を照らすように、至極の誠実さで生に向き合う時、私たちの生は完成します。",
+                qna_title: "質問と討論", qna_info: "作成された内容は、メールクライアントを通じて作成者に直接送信されます。", btn_send: "送信"
+            },
+            es: {
+                menu_intro: "Inicio: Concepto", menu_dev: "Desarrollo: Unidad", menu_twist: "Práctica: Acción", menu_conc: "Conclusión", menu_qna: "P&R",
+                act1: "Acto 1: Inicio", title_main: "Rectificación de Nombres:<br>Concepto",
+                main_desc: "Para comprender el principio del cambio cósmico, primero se debe definir correctamente la terminología. Cambio, Consistencia y Sincronicidad.",
+                card_change: "Cambio", card_const: "Consistencia", card_sync: "Sincronicidad",
+                desc_change: "Todo en el universo fluye sin cesar. Es el reconocimiento del flujo mismo, no de una sustancia fija.",
+                desc_const: "Un corazón inmutable, una sinceridad constante. Es la luz que sostiene el interior de la misma manera que el sol brilla.",
+                desc_sync: "Un estado donde el espacio y el tiempo no están separados, sino interconectados. El estado del Taiji.",
+                click_view: "Click para Ver",
+                act2: "Acto 2: Desarrollo", chart_title: "El Fin del Dualismo", chart_desc: "La mecánica cuántica demostró que las partículas y las ondas no están separadas.",
+                btn_dual: "Dualismo (Separación)", btn_sync: "Sincronicidad (Unidad)", caption_dual: "Actual: Vista Separada (Partícula y Onda)", caption_sync: "Actual: Sincronicidad (Energía Unificada)",
+                act3: "Acto 3: Práctica", practice_title: "De la Conciencia a la Acción", practice_desc: "El Cambio y la Sincronicidad son leyes cósmicas, pero la Consistencia es nuestra responsabilidad.",
+                step1: "Paso 1: Definición", step1_desc: "Establecer conceptos firmes. La 'Meditación de Dibujo' es la herramienta para internalizarlo.",
+                step2: "Paso 2: Conciencia", step2_desc: "Aceptar los principios con el corazón, no solo con la mente.",
+                step3: "Paso 3: Unidad de Acción", step3_desc: "Una vida de práctica gozosa donde el conocimiento y la vida se vuelven uno.",
+                act4: "Acto 4: Conclusión", life_title: "Perfección de Vida: Sinceridad", life_desc: "Como el sol que ilumina todo, la vida se completa cuando la tratamos con absoluta sinceridad.",
+                qna_title: "Preguntas y Debate", qna_info: "El mensaje se enviará directamente al autor a través de su cliente de correo electrónico.", btn_send: "Enviar"
+            },
+            cn: {
+                menu_intro: "起: 概念", menu_dev: "承: 整合", menu_twist: "转: 实践", menu_conc: "结: 完成", menu_qna: "问答",
+                act1: "第一幕: 起", title_main: "正名化: 确立概念",
+                main_desc: "要理解宇宙变化的原理，首先必须正确定义术语。变化、恒常性、共时性。手握这三把钥匙，门才会打开。",
+                card_change: "变化 (Change)", card_const: "恒常性 (Consistency)", card_sync: "共时性 (Synchronicity)",
+                desc_change: "宇宙万物从未停滞，而是处于永恒的流变之中。这是对流动本身而非固定实体的认知。",
+                desc_const: "不渝之心，一如既往的诚挚。如同太阳无差别地普照万物，这是支撑内心的光芒。",
+                desc_sync: "时空并非分离，而是连结为一的状态。既是粒子又是波动的太极状态。",
+                click_view: "点击查看",
+                act2: "第二幕: 承", chart_title: "二分法的终结与整合", chart_desc: "量子力学证明了粒子与波动并非彼此分离。",
+                btn_dual: "二分法 (分离)", btn_sync: "共时性 (整合)", caption_dual: "当前: 分离的视角 (粒子与波)", caption_sync: "当前: 共时性 (整合的能量)",
+                act3: "第三幕: 转", practice_title: "从自觉走向实践", practice_desc: "变化与共时性虽是宇宙的规律，但恒常性取决于我们自身的修行。",
+                step1: "1阶段: 正名化", step1_desc: "树立正确的概念。“绘画冥想”是内化这一概念的的工具。",
+                step2: "2阶段: 自觉", step2_desc: "并非用脑，而是用心去感悟并接受宇宙的规律。",
+                step3: "3阶段: 知行合一", step3_desc: "知与行合而为一，活出充满神明（精神饱满）之喜悦 nodal 的实践人生。",
+                act4: "第四幕: 结", life_title: "人生的完成: 至极精诚", life_desc: "犹如太阳普照万物，当我们用至极的精诚对待生活时，人生便臻于圆满。",
+                qna_title: "提问与讨论", qna_info: "您填写的内容将通过电子邮件客户端直接发送给作者。", btn_send: "发送"
+            }
+        };
+
+        function changeLang(lang, btnElement) {
+            currentLang = lang;
+            // 텍스트 다국어 교체
+            document.querySelectorAll('[data-key]').forEach(el => {
+                const key = el.getAttribute('data-key');
+                if(langData[lang][key]) el.innerHTML = langData[lang][key];
+            });
+            
+            // 다국어 버튼 활성화 UI 상태 토글
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            btnElement.classList.add('active');
+
+            // 차트 캡션 다국어 동적 보정
+            const caption = document.getElementById('chart-caption');
+            const isDualActive = document.getElementById('btn-dualism').classList.contains('bg-amber-600');
+            if (isDualActive) {
+                caption.innerText = langData[lang]['caption_dual'];
+            } else {
+                caption.innerText = langData[lang]['caption_sync'];
+            }
+        }
+    </script>
+</body>
+</html>
