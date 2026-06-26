@@ -1,0 +1,472 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>찬영의 Home — 강의 · 자료 · 개인</title>
+  <meta name="description" content="Notion Home 기반 웹 대시보드 + 주역·양자역학·우주 변화 3축 圖說" />
+  <style>
+    :root{
+      --bg:#0b1020;
+      --panel:#0f1733;
+      --card:#111b3d;
+      --text:#eaf0ff;
+      --muted:#b7c3ff;
+      --line:rgba(255,255,255,.12);
+      --accent:#7aa2ff;
+      --accent2:#5eead4;
+      --warn:#ffd166;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius:18px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, "Noto Sans KR", Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(1200px 600px at 20% -10%, rgba(122,162,255,.25), transparent 60%),
+                  radial-gradient(900px 520px at 110% 10%, rgba(94,234,212,.18), transparent 55%),
+                  var(--bg);
+      color:var(--text);
+    }
+    a{color:inherit}
+    .wrap{max-width:1100px;margin:0 auto;padding:28px 18px 60px}
+    header{
+      padding:22px 18px;
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .topline{display:flex;gap:14px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+    .brand h1{margin:0;font-size:22px;letter-spacing:.2px}
+    .brand p{margin:6px 0 0;color:var(--muted);font-size:13px;line-height:1.4}
+    nav{
+      display:flex;gap:10px;flex-wrap:wrap;
+    }
+    nav a{
+      text-decoration:none;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      padding:9px 12px;
+      border-radius:999px;
+      font-size:13px;
+      color:var(--muted);
+    }
+    nav a:hover{border-color:rgba(122,162,255,.55); color:var(--text)}
+    .grid{
+      margin-top:18px;
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:16px;
+    }
+    @media (max-width: 940px){
+      .grid{grid-template-columns:1fr}
+    }
+    .panel{
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.03);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .panel .hd{
+      padding:14px 16px;
+      border-bottom:1px solid var(--line);
+      display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;
+    }
+    .panel .hd h2{
+      margin:0;
+      font-size:15px;
+      letter-spacing:.2px;
+      color:var(--text);
+    }
+    .panel .bd{padding:16px}
+    .cards{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap:12px;
+    }
+    @media (max-width: 560px){
+      .cards{grid-template-columns:1fr}
+    }
+    .card{
+      border:1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(17,27,61,.65);
+      padding:14px 14px 12px;
+    }
+    .card h3{margin:0 0 8px;font-size:14px}
+    .card ul{margin:0;padding-left:18px;color:var(--muted);font-size:13px;line-height:1.55}
+    .tagrow{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+    .tag{
+      font-size:12px;
+      padding:6px 10px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      color:var(--muted);
+      background: rgba(255,255,255,.03);
+    }
+    .tag.accent{border-color:rgba(122,162,255,.55); color:var(--text)}
+    .tag.mint{border-color:rgba(94,234,212,.55); color:var(--text)}
+    .tag.warn{border-color:rgba(255,209,102,.6); color:var(--text)}
+    .mini{
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.5;
+      margin-top:10px;
+    }
+    .svgbox{
+      padding:12px;
+      border:1px solid var(--line);
+      border-radius:16px;
+      background: rgba(255,255,255,.02);
+      overflow:auto;
+    }
+    footer{
+      margin-top:18px;
+      color:rgba(234,240,255,.75);
+      font-size:12px;
+      line-height:1.5;
+      text-align:center;
+    }
+    .note{
+      margin-top:10px;
+      padding:10px 12px;
+      border-left:3px solid rgba(94,234,212,.65);
+      background: rgba(94,234,212,.08);
+      border-radius:12px;
+      color:rgba(234,240,255,.86);
+      font-size:13px;
+      line-height:1.55;
+    }
+    code.k{color:#dbe7ff}
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header id="top">
+      <div class="topline">
+        <div class="brand">
+          <h1>☯️ 찬영의 Home</h1>
+          <p>
+            Notion Home(https://app.notion.com/p/efacb8a1db28468fa209665b2bd46673) 구조를 웹페이지로 재구성한 대시보드.<br/>
+            상단 圖說: <code class="k">주역(變易·不易·易簡)</code> ↔ <code class="k">우주 변화 3축(변화·항상성·동시성)</code> ↔ <code class="k">양자역학(불확정성·대칭/보존·중첩/얽힘/상보성)</code>
+          </p>
+        </div>
+        <nav aria-label="섹션 이동">
+          <a href="#diagram">圖說</a>
+          <a href="#lectures">강의</a>
+          <a href="#info">정보</a>
+          <a href="#personal">개인</a>
+          <a href="#schedule">스케줄</a>
+        </nav>
+      </div>
+      <div class="note">
+        이 페이지는 “Home”에서 자주 쓰는 항목을 빠르게 찾기 위한 <b>웹 버전 허브</b>입니다.
+        실제 링크는 필요에 따라 Notion/외부 링크로 교체해서 사용하세요.
+      </div>
+    </header>
+
+    <div class="grid">
+      <!-- Left: Diagram + Key summary -->
+      <section class="panel" id="diagram" aria-label="도해">
+        <div class="hd">
+          <h2>圖說 — 우주 변화 3축이 두 체계를 ‘번역’하는 역할(役)</h2>
+          <div class="tagrow">
+            <span class="tag accent">변화</span>
+            <span class="tag mint">항상성</span>
+            <span class="tag warn">동시성</span>
+          </div>
+        </div>
+        <div class="bd">
+          <div class="svgbox">
+            <!-- Inline SVG (webpage용) -->
+            <svg viewBox="0 0 980 560" width="980" height="560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="주역·양자역학·우주 변화 3축 관계도">
+              <defs>
+                <style>
+                  .title { font: 700 22px/1.2 system-ui, -apple-system, "Noto Sans KR", sans-serif; fill:#0b1020; }
+                  .sub   { font: 600 14px/1.4 system-ui, -apple-system, "Noto Sans KR", sans-serif; fill:#223; }
+                  .h     { font: 800 16px/1.2 system-ui, -apple-system, "Noto Sans KR", sans-serif; fill:#0b1020; }
+                  .t     { font: 650 14px/1.35 system-ui, -apple-system, "Noto Sans KR", sans-serif; fill:#0b1020; }
+                  .tiny  { font: 600 12px/1.3 system-ui, -apple-system, "Noto Sans KR", sans-serif; fill:#223; }
+                  .box { fill:#ffffff; stroke:#1a1f2e; stroke-width:1.2; rx:14; }
+                  .iching { fill:#eef4ff; stroke:#3b5bdb; stroke-width:1.4; rx:14; }
+                  .quant { fill:#fff6e6; stroke:#e67700; stroke-width:1.4; rx:14; }
+                  .axis { fill:#eafff4; stroke:#2f9e44; stroke-width:1.4; rx:14; }
+                  .arrow { stroke:#333; stroke-width:1.6; marker-end:url(#m); }
+                  .arrow2 { stroke:#2f9e44; stroke-width:2.2; marker-end:url(#m2); }
+                </style>
+                <marker id="m" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+                  <path d="M0,0 L8,3 L0,6 Z" fill="#333"/>
+                </marker>
+                <marker id="m2" markerWidth="12" markerHeight="12" refX="10" refY="3.5" orient="auto">
+                  <path d="M0,0 L10,3.5 L0,7 Z" fill="#2f9e44"/>
+                </marker>
+                <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+                  <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000" flood-opacity="0.15"/>
+                </filter>
+              </defs>
+
+              <rect x="0" y="0" width="980" height="560" fill="#ffffff" rx="18"/>
+
+              <text x="32" y="44" class="title">주역·양자역학 ↔ 우주 변화 3축(변화·항상성·동시성)</text>
+              <text x="32" y="70" class="sub">핵심: ‘변한다(變)’와 ‘지켜진다(恒)’와 ‘함께 엮인다(同)’는 서로를 배제하지 않고 동시에 작동한다.</text>
+
+              <!-- Left -->
+              <g filter="url(#shadow)">
+                <rect x="32" y="105" width="300" height="170" class="iching"/>
+                <text x="52" y="136" class="h">주역(周易) 3대 관점</text>
+                <text x="52" y="166" class="t">1) 變易: 만물은 변한다</text>
+                <text x="52" y="194" class="t">2) 不易: 변화 속의 불변 원리</text>
+                <text x="52" y="222" class="t">3) 易簡: 복잡을 간결한 상징으로</text>
+                <text x="52" y="248" class="tiny">→ 전체 구조를 “한 번에” 읽게 하는 압축(役)</text>
+              </g>
+
+              <!-- Right -->
+              <g filter="url(#shadow)">
+                <rect x="648" y="105" width="300" height="170" class="quant"/>
+                <text x="668" y="136" class="h">현대물리/양자역학 3대 관점</text>
+                <text x="668" y="166" class="t">1) 불확정성: 확률·요동·과정</text>
+                <text x="668" y="194" class="t">2) 보존·대칭성: 불변 구조(뼈대)</text>
+                <text x="668" y="222" class="t">3) 중첩·얽힘·상보성: 전체 상관</text>
+                <text x="668" y="248" class="tiny">→ 분리보다 ‘전체 상태’를 먼저 기술</text>
+              </g>
+
+              <!-- Center axes -->
+              <g filter="url(#shadow)">
+                <rect x="340" y="295" width="300" height="235" class="axis"/>
+                <text x="360" y="328" class="h">우주 변화 3축 (공덕 선생)</text>
+
+                <rect x="360" y="346" width="260" height="54" class="box"/>
+                <text x="380" y="378" class="t">① 변화(變化)</text>
+                <text x="500" y="378" class="tiny">전이·순환·생성/소멸</text>
+
+                <rect x="360" y="410" width="260" height="54" class="box"/>
+                <text x="380" y="442" class="t">② 항상성(恒常性)</text>
+                <text x="500" y="442" class="tiny">동적 평형·보존·대칭</text>
+
+                <rect x="360" y="474" width="260" height="54" class="box"/>
+                <text x="380" y="506" class="t">③ 동시성(同時性)</text>
+                <text x="500" y="506" class="tiny">연결·상관·의미의 공명</text>
+              </g>
+
+              <!-- mapping arrows -->
+              <line x1="332" y1="165" x2="420" y2="373" class="arrow"/>
+              <text x="344" y="300" class="tiny">變易 → 변화</text>
+
+              <line x1="332" y1="194" x2="420" y2="437" class="arrow"/>
+              <text x="340" y="322" class="tiny">不易 → 항상성</text>
+
+              <line x1="332" y1="222" x2="420" y2="501" class="arrow"/>
+              <text x="340" y="342" class="tiny">易簡 → 동시성(전체 파악)</text>
+
+              <line x1="648" y1="165" x2="560" y2="373" class="arrow"/>
+              <text x="636" y="300" class="tiny" text-anchor="end">불확정성 → 변화</text>
+
+              <line x1="648" y1="194" x2="560" y2="437" class="arrow"/>
+              <text x="636" y="322" class="tiny" text-anchor="end">보존·대칭 → 항상성</text>
+
+              <line x1="648" y1="222" x2="560" y2="501" class="arrow"/>
+              <text x="636" y="342" class="tiny" text-anchor="end">중첩·얽힘·상보성 → 동시성</text>
+
+              <line x1="490" y1="275" x2="490" y2="295" class="arrow2"/>
+              <text x="490" y="290" class="tiny" text-anchor="middle">역(役): 두 언어(철학·과학)를 한 좌표계로 정렬</text>
+            </svg>
+          </div>
+
+          <div class="mini">
+            <b>웹페이지용 요약 문장(그대로 붙여넣기):</b><br/>
+            “우주 변화 3축(변화·항상성·동시성)은 주역(變易·不易·易簡)과 양자역학(불확정성·보존/대칭·중첩/얽힘/상보성)을 서로 번역해 주는 공통 좌표계로 작동한다.”
+          </div>
+        </div>
+      </section>
+
+      <!-- Right: Quick links / Home structure -->
+      <aside class="panel" aria-label="빠른 이동">
+        <div class="hd">
+          <h2>Home 빠른 이동</h2>
+          <a href="#top" class="tag accent" style="text-decoration:none;">맨 위로</a>
+        </div>
+        <div class="bd">
+          <div class="card">
+            <h3>📌 Notion Home</h3>
+            <ul>
+              <li>기준 페이지: https://app.notion.com/p/efacb8a1db28468fa209665b2bd46673</li>
+              <li>강의 / 정보 / 개인 섹션을 웹으로 재배치</li>
+            </ul>
+            <div class="tagrow">
+              <!-- 필요 시 실제 Notion 공유 링크로 교체 -->
+              <span class="tag">Notion 링크 교체</span>
+              <span class="tag mint">웹 허브</span>
+            </div>
+          </div>
+
+          <div class="card" style="margin-top:12px">
+            <h3>🧭 핵심 주제</h3>
+            <ul>
+              <li>주역·변화원리·우주변화원리</li>
+              <li>현대물리/양자역학</li>
+              <li>의식·뇌, 언어(일본어/스페인어/한문)</li>
+            </ul>
+          </div>
+
+          <div class="mini">
+            팁: 각 항목의 <code class="k">href</code>를 “Notion 공유 링크” 또는 “개인 사이트 링크”로 교체하면
+            이 페이지가 완전한 개인 포털이 됩니다.
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Sections -->
+    <section class="panel" id="lectures" style="margin-top:16px">
+      <div class="hd"><h2>👨‍🏫 강의</h2></div>
+      <div class="bd">
+        <div class="cards">
+          <div class="card">
+            <h3>대표 강의 노트</h3>
+            <ul>
+              <li><a href="https://app.notion.com/p/2a07efce5b818044824fdf6923d9e35e">도마복음</a></li>
+              <li><a href="https://app.notion.com/p/38b7efce5b8180548555c45b65e82b5c">도마복음2</a></li>
+              <li><a href="https://app.notion.com/p/c54e47823b8047b797b32a27be0c0e12">My 일본어</a></li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>변화원리 / 우주변화원리</h3>
+            <ul>
+              <li><a href="https://app.notion.com/p/a480b1b1b0fb4535bbf5688ff9c50741">우주변화원리</a></li>
+              <li><a href="https://app.notion.com/p/003fa5e25d5b48b78a65b8b695cacc99">변화원리 by 동양학 아카데미</a></li>
+              <li><a href="https://app.notion.com/p/0b4422b5b04144ae9e6231348164f9c4">우주변화의 원리 공부</a></li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>탐독(철학/과학)</h3>
+            <ul>
+              <li><a href="https://app.notion.com/p/1c0c9aa82ca74a249902342c57adaec6">도올 주역강해</a></li>
+              <li><a href="https://app.notion.com/p/3dc60d7f22144c1fb6ca1e46c12b5562">도올 서양철학사</a></li>
+              <li><a href="https://app.notion.com/p/e86943405b11450691a60e6c1b706689">양자역학</a></li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>MYBookshelf</h3>
+            <ul>
+              <li>Notion DB: MYBookshelf (Home 인라인 DB)</li>
+              <li>원하시면 여기에도 “웹 테이블/카드” 형태로 확장 가능</li>
+            </ul>
+            <div class="tagrow">
+              <span class="tag">Database</span>
+              <span class="tag accent">독서/자료</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="info" style="margin-top:16px">
+      <div class="hd"><h2>🏫 정보</h2></div>
+      <div class="bd">
+        <div class="cards">
+          <div class="card">
+            <h3>웹 제작</h3>
+            <ul>
+              <li><a href="https://app.notion.com/p/2c07efce5b8180e6a025f20a1d5133b9">WebPage 제작</a></li>
+            </ul>
+            <div class="tagrow">
+              <span class="tag mint">프로젝트</span>
+              <span class="tag">개발/학습</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>AI 사용법</h3>
+            <ul>
+              <li><a href="https://app.notion.com/p/2c07efce5b81809db9c6df2a0248b196">AI Tool Collection (2025.12.04)</a></li>
+              <li><a href="https://app.notion.com/p/33a7efce5b818003b1f2e890d7e39d48">AI 학습</a></li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>EverNote / 창고 / 모음</h3>
+            <ul>
+              <li>Home에 연결된 여러 DB/자료 모음(필요 시 링크 정리)</li>
+              <li>“자주 쓰는 것 TOP 10”만 추려서 홈 화면을 더 단순화 가능</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>참고 글(외부)</h3>
+            <ul>
+              <li><a href="https://chan-61.github.io/kchan/axis4" target="_blank" rel="noopener">axis4: 우주 변화 3대 관점 비교</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="personal" style="margin-top:16px">
+      <div class="hd"><h2>📚 개인</h2></div>
+      <div class="bd">
+        <div class="cards">
+          <div class="card">
+            <h3>건강/수련</h3>
+            <ul>
+              <li><a href="https://app.notion.com/p/ffa1f008ef7742e08b186fb02944b517">수행</a></li>
+              <li><a href="https://app.notion.com/p/8259b10993a647b18a1f13035c095a74">건강관리</a></li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>취미</h3>
+            <ul>
+              <li><a href="https://app.notion.com/p/9faaf83f458140a19b4f58a38f1c23fc">RC Glider DLG 外</a></li>
+              <li><a href="https://app.notion.com/p/f882059c2e284a73b619f07d60125d85">낚시</a></li>
+              <li><a href="https://app.notion.com/p/5da480cbceb14a96a6d464f55e1a8ec2">탁구</a></li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>음악/드로잉</h3>
+            <ul>
+              <li><a href="https://app.notion.com/p/b26dec7a58484677b52556373af1b50a">My Music</a></li>
+              <li><a href="https://app.notion.com/p/3247efce5b81805e956ce2787ec14ce2">드로잉 기초</a></li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>모임/인터뷰</h3>
+            <ul>
+              <li>Home에 “Interview” DB가 연결되어 있음(필요 시 웹 링크 추가)</li>
+              <li><a href="https://app.notion.com/p/5d898261d25644999fbab80cddb7b9fa">재경 26회 동명고</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="schedule" style="margin-top:16px">
+      <div class="hd"><h2>🗓️ 스케줄</h2></div>
+      <div class="bd">
+        <div class="card">
+          <h3>Notion 스케줄 DB</h3>
+          <ul>
+            <li>Home 하단에 인라인 DB “스케줄”이 있음</li>
+            <li>웹에서 직접 편집하려면 (1) Notion 공개 공유 또는 (2) 별도 웹 앱 연동이 필요</li>
+          </ul>
+          <div class="mini">
+            현재 이 아티팩트는 “한 페이지 정적 HTML”이므로, 여기서는 <b>바로가기 허브</b> 역할에 집중했습니다.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      © 찬영의 Home — single page HTML artifact. <br/>
+      (Notion 내부 링크/공유 링크 정책에 따라, 외부에서 열릴 수 있도록 링크를 교체/공유 설정하세요.)
+    </footer>
+  </div>
+</body>
+</html>
