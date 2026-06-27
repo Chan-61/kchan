@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>주역(周易)의 실천 철학: 변화와 항상성의 동시성</title>
+    <style>
+        /* 기본 스타일 리셋 및 폰트 설정 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+            background-color: #fcfbfa;
+            color: #2c2a29;
+            line-height: 1.7;
+            padding: 0;
+        }
+
+        /* 헤더 디자인 */
+        header {
+            background: linear-gradient(135deg, #1e1b18 0%, #3a322d 100%);
+            color: #fff;
+            text-align: center;
+            padding: 5rem 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: #e07a5f;
+        }
+        header p.subtitle {
+            color: #e07a5f;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        header h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            word-break: keep-all;
+        }
+        header p.description {
+            color: #d1cbc6;
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1.05rem;
+            word-break: keep-all;
+        }
+
+        /* 메인 컨텐츠 영역 */
+        main {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+        }
+
+        /* 기승전결 타임라인 카드 스타일 */
+        .section-title {
+            font-size: 1.5rem;
+            color: #3a322d;
+            border-left: 4px solid #e07a5f;
+            padding-left: 0.75rem;
+            margin-bottom: 2rem;
+            font-weight: 700;
+        }
+        
+        .card {
+            background: #ffffff;
+            border: 1px solid #eae6e1;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            transition: transform 0.2s ease;
+        }
+        .card:hover {
+            transform: translateY(-2px);
+        }
+        .card-tag {
+            display: inline-block;
+            background-color: #f4f1de;
+            color: #3d5a80;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        .card h3 {
+            font-size: 1.3rem;
+            color: #1e1b18;
+            margin-bottom: 1rem;
+        }
+        .card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .card ul li {
+            position: relative;
+            padding-left: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+        .card ul li::before {
+            content: "•";
+            color: #e07a5f;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        .card strong {
+            color: #bd5338;
+        }
+
+        /* 콜아웃 상자 (오전 10시 반 명상 가이드) */
+        .callout {
+            background-color: #fdf5f0;
+            border-left: 4px solid #e07a5f;
+            border-radius: 0 12px 12px 0;
+            padding: 2rem;
+            margin: 3rem 0;
+        }
+        .callout h4 {
+            color: #bd5338;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .step {
+            margin-bottom: 1.25rem;
+        }
+        .step:last-child {
+            margin-bottom: 0;
+        }
+        .step-title {
+            font-weight: 700;
+            color: #3a322d;
+            margin-bottom: 0.25rem;
+        }
+        .step-desc {
+            font-size: 0.95rem;
+            color: #555;
+        }
+
+        /* 지행합일 파트 디자인 */
+        .action-section {
+            background-color: #3a322d;
+            color: #fff;
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin-top: 4rem;
+        }
+        .action-section h3 {
+            color: #f4f1de;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+        .action-section p.quote {
+            font-style: italic;
+            text-align: center;
+            color: #d1cbc6;
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+        }
+        .action-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+        .action-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 1.25rem;
+        }
+        .action-item h4 {
+            color: #e07a5f;
+            margin-bottom: 0.5rem;
+        }
+        .action-item p {
+            font-size: 0.95rem;
+            color: #e5e0db;
+        }
+        .note-box {
+            margin-top: 2rem;
+            background: rgba(224, 122, 95, 0.15);
+            border: 1px dashed #e07a5f;
+            padding: 1.25rem;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        /* 푸터 디자인 */
+        footer {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: #8c857f;
+            font-size: 0.85rem;
+            border-top: 1px solid #eae6e1;
+            margin-top: 5rem;
+        }
+
+        /* 반응형 디자인 조절 */
+        @media (max-width: 600px) {
+            header { padding: 3.5rem 1rem; }
+            header h1 { font-size: 1.7rem; }
+            .card { padding: 1.5rem; }
+            .action-section { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 헤더 영역 -->
+    <header>
+        <p class="subtitle">Book of Changes & Philosophy</p>
+        <h1>주역(周易)의 실천 철학<br>변화와 항상성의 동시성</h1>
+        <p class="description">우주의 본질을 깨닫고, 지금 이 순간 내면의 태양을 띄워 삶 속에서 지행합일을 이룹니다.</p>
+    </header>
+
+    <!-- 메인 콘텐츠 -->
+    <main>
+        
+        <h2 class="section-section-title" style="display:none;">주역의 사상구조</h2>
+        <div class="section-title">기승전결(起承轉結)로 보는 철학적 통찰</div>
+
+        <!-- [起] 기 카드 -->
+        <div class="card">
+            <span class="card-tag">起 · 일깨움</span>
+            <h3>변화와 항상성의 역설</h3>
+            <ul>
+                <li>주역에서 변화(變)와 항상성(恒)은 대립하는 모순이 아니라, 존재의 영속성을 유지하기 위해 맞물려 돌아가는 동전의 앞뒷면입니다.</li>
+                <li>"사물이 극에 달하면 변하고, 변하면 통하며, 통하여야 영원할 수 있다(<strong>窮則變 變則通 通則久</strong>)."</li>
+                <li>절대적인 고정 불변은 정체와 죽음을 의미합니다. 진정한 항상성은 끊임없는 유연한 변화를 통해서만 완성됩니다.</li>
+            </ul>
+        </div>
+
+        <!-- [承] 승 카드 -->
+        <div class="card">
+            <span class="card-tag">承 · 이어받음</span>
+            <h3>항상심의 구현과 일본만수(一本萬殊)</h3>
+            <ul>
+                <li><strong>어머니의 항상심:</strong> 현상적으로는 자식의 성장 단계에 따라 엄함과 부드러움으로 행동을 바꾸지만, 바탕에 깔린 지극정성의 사랑은 절대 변하지 않습니다.</li>
+                <li><strong>우주적 상징:</strong> 태양은 선인과 악인, 꽃과 잡초를 가리지 않고 차별 없이 빛을 방출하는 대공무사(<strong>大公無私</strong>)의 성질을 가집니다.</li>
+                <li><strong>일본만수(一本萬殊):</strong> 우주의 근본 법칙과 조건 없는 사랑이라는 본질은 하나(<strong>一本</strong>)이지만, 그 빛을 받아 성장하는 현상과 변화는 만 가지(<strong>萬殊</strong>)로 다채롭습니다.</li>
+            </ul>
+        </div>
+
+        <!-- [轉] 전 카드 -->
+        <div class="card">
+            <span class="card-tag">轉 · 전환</span>
+            <h3>시공을 초월한 동시성 (체용의 원리)</h3>
+            <ul>
+                <li>변화와 항상성은 시간차를 두고 따로 일어나는 현상이 아니며, '지금 이 순간' 동시에 작동하는 <strong>동시성(Synchronicity)</strong>을 가집니다.</li>
+                <li><strong>강물의 비유:</strong> 한순간도 멈추지 않고 흐르는 격렬한 '변화'가 존재하기에, 역설적으로 강이라는 형태의 '항상성'이 매 순간 유지됩니다.</li>
+                <li><strong>체용(體用)의 일치:</strong> 항상성은 본질(體)이고 변화는 작용(用)입니다. 어머니가 잔소리를 하거나 안아주는 그 모든 변화의 매 초(Second)마다 항상심은 100% 동시적으로 녹아들어 있습니다.</li>
+            </ul>
+        </div>
+
+        <!-- [結] 결 카드 -->
+        <div class="card">
+            <span class="card-tag">結 · 맺음</span>
+            <h3>일상에서의 세 가지 자각 (易·恒·時)</h3>
+            <ul>
+                <li><strong>변화(易)의 자각:</strong> 내면의 감정과 불안이 한곳에 머물지 않고 구름처럼 흘러가는 변화의 현상임을 가만히 관조합니다.</li>
+                <li><strong>항상성(恒)의 자각:</strong> 외부 환경이 아무리 요동쳐도 나를 지켜주는 내면의 중심축(나만의 태양)을 단단히 확립합니다.</li>
+                <li><strong>동시성(時)의 자각:</strong> 과거에 대한 후회나 미래의 불안을 지우고, '지금 하고 있는 행위'에 마음을 100% 밀착시킵니다.</li>
+            </ul>
+        </div>
+
+
+        <!-- 오전 10시 반 루틴 콜아웃 상자 -->
+        <div class="callout">
+            <h4>🧘‍♂️ 오전 10시 반: 동(動)에서 정(靜)으로 나아가는 '태양의 좌선'</h4>
+            <p style="font-size: 0.95rem; color:#666; margin-bottom: 1.5rem; word-break: keep-all;">
+                스트레칭이나 몸풀기 운동으로 몸의 기혈을 순환시킨 직후, 10~15분간 자리에 바르게 앉아 주역의 동시성을 온몸으로 각인하는 최적의 루틴입니다.
+            </p>
+            
+            <div class="step">
+                <div class="step-title">1단계. 몸의 변화를 관조하기 (운동 직후 1분)</div>
+                <div class="step-desc">가부좌로 앉아 거칠어진 숨소리, 빠르게 뛰는 심장, 피어오르는 열감을 가만히 느낍니다. 이는 살아 움직인다는 격렬한 <strong>변화(易)</strong>의 증거이며 그대로 흐르게 둡니다.</div>
+            </div>
+            
+            <div class="step">
+                <div class="step-title">2단계. 내면의 태양 띄우기 (지속 10분)</div>
+                <div class="step-desc">숨이 차분해지면 의식을 호흡에 모읍니다. 스쳐 지나가는 잡념은 구름일 뿐이며, 구름 너머의 태양처럼 늘 그 자리에 존재하는 고요한 중심축(<strong>항상심</strong>)을 자각합니다.</div>
+            </div>
+            
+            <div class="step">
+                <div class="step-title">3단계. 동시성의 자각과 복귀 (마무리 1분)</div>
+                <div class="step-desc">'좌선을 하는 고요함'과 '다시 활동할 역동성'이 분리된 것이 아님을 느낍니다. 움직임 속의 고요함을 품는 <strong>동시성</strong>을 안고 일상으로 복귀합니다.</div>
+            </div>
+        </div>
+
+
