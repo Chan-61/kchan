@@ -683,93 +683,104 @@
       </div>
       <div class="bd">
         <div class="svgbox">
-          <svg viewBox="0 0 980 560" width="980" height="560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="주역·양자역학·우주 변화 3축 관계도">
-            <defs>
-              <style>
-                .title { font: 800 22px/1.2 system-ui, -apple-system, "Noto Sans KR", sans-serif; fill:#0b1020; }
-                .sub   { font: 650 14px/1.4 system-ui, -apple-system, "Noto Sans KR", sans-serif; fill:#223; }
-                .h     { font: 850 16px/1.2 system-ui, -apple-system, "Noto Sans KR", sans-serif; fill:#0b1020; }
-                .t     { font: 650 14px/1.35 system-ui, -apple-system, "Noto Sans KR", sans-serif; fill:#0b1020; }
-                .tiny  { font: 600 12px/1.3 system-ui, -apple-system, "Noto Sans KR", sans-serif; fill:#223; }
-                .box { fill:#ffffff; stroke:#1a1f2e; stroke-width:1.2; rx:14; }
-                .iching { fill:#eef4ff; stroke:#3b5bdb; stroke-width:1.4; rx:14; }
-                .quant { fill:#fff6e6; stroke:#e67700; stroke-width:1.4; rx:14; }
-                .axis { fill:#eafff4; stroke:#2f9e44; stroke-width:1.4; rx:14; }
-                .arrow { stroke:#333; stroke-width:1.6; marker-end:url(#m); }
-                .arrow2 { stroke:#2f9e44; stroke-width:2.2; marker-end:url(#m2); }
-              </style>
-              <marker id="m" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
-                <path d="M0,0 L8,3 L0,6 Z" fill="#333"/>
-              </marker>
-              <marker id="m2" markerWidth="12" markerHeight="12" refX="10" refY="3.5" orient="auto">
-                <path d="M0,0 L10,3.5 L0,7 Z" fill="#2f9e44"/>
-              </marker>
-              <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-                <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000" flood-opacity="0.15"/>
-              </filter>
-            </defs>
+          <!-- (B) 미니멀 범례형: 글자 겹침 최소화 + 화살표 라벨 제거 + 범례 1줄 -->
+<svg viewBox="0 0 980 560" width="980" height="560"
+     xmlns="http://www.w3.org/2000/svg" role="img"
+     aria-label="주역·양자역학·우주 변화 3축 관계도(미니멀 범례형)">
 
-            <rect x="0" y="0" width="980" height="560" fill="#ffffff" rx="18"/>
+  <defs>
+    <style>
+      .title { font: 800 20px/1.2 system-ui, -apple-system, "Noto Sans KR", sans-serif; fill:#0b1020; }
+      .sub   { font: 650 13px/1.4 system-ui, -apple-system, "Noto Sans KR", sans-serif; fill:#223; }
+      .h     { font: 850 15px/1.2 system-ui, -apple-system, "Noto Sans KR", sans-serif; fill:#0b1020; }
+      .t     { font: 650 13px/1.35 system-ui, -apple-system, "Noto Sans KR", sans-serif; fill:#0b1020; }
+      .tiny  { font: 650 12px/1.3 system-ui, -apple-system, "Noto Sans KR", sans-serif; fill:#223; }
 
-            <text x="32" y="44" class="title">주역·양자역학 ↔ 우주 변화 3축(변화·항상성·동시성)</text>
-            <text x="32" y="70" class="sub">핵심: 3축은 두 체계를 정렬하는 “공통 좌표계(役)”로 작동한다.</text>
+      .box   { fill:#ffffff; stroke:#1a1f2e; stroke-width:1.2; rx:14; }
+      .iching{ fill:#eef4ff; stroke:#3b5bdb; stroke-width:1.4; rx:14; }
+      .quant { fill:#fff6e6; stroke:#e67700; stroke-width:1.4; rx:14; }
+      .axis  { fill:#eafff4; stroke:#2f9e44; stroke-width:1.4; rx:14; }
 
-            <g filter="url(#shadow)">
-              <rect x="32" y="105" width="300" height="170" class="iching"/>
-              <text x="52" y="136" class="h">주역(周易) 3대 관점</text>
-              <text x="52" y="166" class="t">1) 變易: 만물은 변한다</text>
-              <text x="52" y="194" class="t">2) 不易: 변화 속의 불변 원리</text>
-              <text x="52" y="222" class="t">3) 易簡: 복잡을 간결한 상징으로</text>
-              <text x="52" y="248" class="tiny">→ 전체 구조를 “한 번에” 읽게 하는 압축(役)</text>
-            </g>
+      .arrow  { stroke:#333; stroke-width:1.6; marker-end:url(#m); }
+      .arrow2 { stroke:#2f9e44; stroke-width:2.0; marker-end:url(#m2); }
+    </style>
 
-            <g filter="url(#shadow)">
-              <rect x="648" y="105" width="300" height="170" class="quant"/>
-              <text x="668" y="136" class="h">현대물리/양자역학 3대 관점</text>
-              <text x="668" y="166" class="t">1) 불확정성: 확률·요동·과정</text>
-              <text x="668" y="194" class="t">2) 보존·대칭성: 불변 구조(뼈대)</text>
-              <text x="668" y="222" class="t">3) 중첩·얽힘·상보성: 전체 상관</text>
-              <text x="668" y="248" class="tiny">→ 분리보다 ‘전체 상태’를 먼저 기술</text>
-            </g>
+    <marker id="m" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#333"/>
+    </marker>
+    <marker id="m2" markerWidth="12" markerHeight="12" refX="10" refY="3.5" orient="auto">
+      <path d="M0,0 L10,3.5 L0,7 Z" fill="#2f9e44"/>
+    </marker>
 
-            <g filter="url(#shadow)">
-              <rect x="340" y="295" width="300" height="235" class="axis"/>
-              <text x="360" y="328" class="h">우주 변화 3축 (공덕 선생)</text>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000" flood-opacity="0.15"/>
+    </filter>
+  </defs>
 
-              <rect x="360" y="346" width="260" height="54" class="box"/>
-              <text x="380" y="378" class="t">① 변화(變化)</text>
-              <text x="500" y="378" class="tiny">전이·순환·생성/소멸</text>
+  <rect x="0" y="0" width="980" height="560" fill="#ffffff" rx="18"/>
 
-              <rect x="360" y="410" width="260" height="54" class="box"/>
-              <text x="380" y="442" class="t">② 항상성(恒常性)</text>
-              <text x="500" y="442" class="tiny">동적 평형·보존·대칭</text>
+  <!-- Title area -->
+  <text x="32" y="42" class="title">주역 ↔ 3축 ↔ 양자역학</text>
+  <text x="32" y="66" class="sub">3축(변화·항상성·동시성)은 두 체계를 정렬하는 공통 좌표계(役)</text>
 
-              <rect x="360" y="474" width="260" height="54" class="box"/>
-              <text x="380" y="506" class="t">③ 동시성(同時性)</text>
-              <text x="500" y="506" class="tiny">연결·상관·의미의 공명</text>
-            </g>
+  <!-- Left: I Ching -->
+  <g filter="url(#shadow)">
+    <rect x="32" y="95" width="300" height="150" class="iching"/>
+    <text x="52" y="124" class="h">주역 3대 관점</text>
+    <text x="52" y="154" class="t">變易</text>
+    <text x="52" y="180" class="t">不易</text>
+    <text x="52" y="206" class="t">易簡</text>
+    <text x="52" y="230" class="tiny">→ 변화 / 불변 / 간결 구조</text>
+  </g>
 
-            <line x1="332" y1="165" x2="420" y2="373" class="arrow"/>
-            <text x="344" y="300" class="tiny">變易 → 변화</text>
+  <!-- Right: Quantum -->
+  <g filter="url(#shadow)">
+    <rect x="648" y="95" width="300" height="150" class="quant"/>
+    <text x="668" y="124" class="h">양자역학 3대 관점</text>
+    <text x="668" y="154" class="t">불확정성</text>
+    <text x="668" y="180" class="t">보존·대칭성</text>
+    <text x="668" y="206" class="t">중첩·얽힘·상보성</text>
+    <text x="668" y="230" class="tiny">→ 요동 / 뼈대 / 상관</text>
+  </g>
 
-            <line x1="332" y1="194" x2="420" y2="437" class="arrow"/>
-            <text x="340" y="322" class="tiny">不易 → 항상성</text>
+  <!-- Center: Axes (아주 간단) -->
+  <g filter="url(#shadow)">
+    <rect x="340" y="285" width="300" height="220" class="axis"/>
+    <text x="360" y="316" class="h">우주 변화 3축</text>
 
-            <line x1="332" y1="222" x2="420" y2="501" class="arrow"/>
-            <text x="340" y="342" class="tiny">易簡 → 동시성(전체 파악)</text>
+    <rect x="360" y="332" width="260" height="50" class="box"/>
+    <text x="380" y="362" class="t">① 변화</text>
 
-            <line x1="648" y1="165" x2="560" y2="373" class="arrow"/>
-            <text x="636" y="300" class="tiny" text-anchor="end">불확정성 → 변화</text>
+    <rect x="360" y="392" width="260" height="50" class="box"/>
+    <text x="380" y="422" class="t">② 항상성</text>
 
-            <line x1="648" y1="194" x2="560" y2="437" class="arrow"/>
-            <text x="636" y="322" class="tiny" text-anchor="end">보존·대칭 → 항상성</text>
+    <rect x="360" y="452" width="260" height="50" class="box"/>
+    <text x="380" y="482" class="t">③ 동시성</text>
+  </g>
 
-            <line x1="648" y1="222" x2="560" y2="501" class="arrow"/>
-            <text x="636" y="342" class="tiny" text-anchor="end">중첩·얽힘·상보성 → 동시성</text>
+  <!-- Arrows only (라벨 없음) -->
+  <!-- Left -> Center -->
+  <line x1="332" y1="154" x2="420" y2="357" class="arrow"/>
+  <line x1="332" y1="180" x2="420" y2="417" class="arrow"/>
+  <line x1="332" y1="206" x2="420" y2="477" class="arrow"/>
 
-            <line x1="490" y1="275" x2="490" y2="295" class="arrow2"/>
-            <text x="490" y="290" class="tiny" text-anchor="middle">역(役): 두 언어(철학·과학)를 한 좌표계로 정렬</text>
-          </svg>
+  <!-- Right -> Center -->
+  <line x1="648" y1="154" x2="560" y2="357" class="arrow"/>
+  <line x1="648" y1="180" x2="560" y2="417" class="arrow"/>
+  <line x1="648" y1="206" x2="560" y2="477" class="arrow"/>
+
+  <!-- Synthesis arrow -->
+  <line x1="490" y1="252" x2="490" y2="285" class="arrow2"/>
+
+  <!-- Minimal Legend (범례 1줄) -->
+  <g>
+    <rect x="32" y="515" width="916" height="32" class="box"/>
+    <text x="50" y="536" class="tiny">
+      범례: 變易=변화 · 不易=항상성(불변 뼈대) · 易簡=동시성(전체를 간결 구조로) /
+      불확정성=변화 · 보존·대칭=항상성 · 중첩·얽힘·상보성=동시성
+    </text>
+  </g>
+</svg>
         </div>
 
         <div class="kline" style="margin-top:12px">
