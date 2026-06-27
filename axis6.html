@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>공덕 선생 — 3축 자각(변화·항상성·동시성) Webpage</title>
-  <meta name="description" content="공덕 선생의 3축 자각(변화·항상성·동시성) 과정을 연대기·도해·실천으로 정리한 1페이지 웹문서" />
+  <title>공덕 선생 3축 자각 — 통합판(주역↔양자↔3축)</title>
+  <meta name="description" content="공덕 선생의 3축 자각(변화·항상성·동시성) + 주역(변역·불역·이간) ↔ 양자역학 연결을 한 페이지로 통합" />
   <style>
     :root{
       --bg:#0b1020;
@@ -17,6 +17,8 @@
       --cChange:#7aa2ff;   /* 변화 */
       --cHomeo:#5eead4;    /* 항상성 */
       --cSynch:#ffd166;    /* 동시성 */
+      --cIChing:#93c5fd;   /* 주역 */
+      --cQuantum:#f59e0b;  /* 양자 */
 
       --shadow: 0 10px 32px rgba(0,0,0,.38);
       --radius:18px;
@@ -26,10 +28,11 @@
     body{
       margin:0;
       font-family: system-ui, -apple-system, "Noto Sans KR", Segoe UI, Roboto, Arial, sans-serif;
-      background: radial-gradient(1200px 600px at 20% -10%, rgba(122,162,255,.25), transparent 60%),
-                  radial-gradient(900px 520px at 110% 10%, rgba(94,234,212,.16), transparent 55%),
-                  radial-gradient(900px 520px at 55% 110%, rgba(255,209,102,.12), transparent 55%),
-                  var(--bg);
+      background:
+        radial-gradient(1200px 600px at 20% -10%, rgba(122,162,255,.25), transparent 60%),
+        radial-gradient(900px 520px at 110% 10%, rgba(94,234,212,.16), transparent 55%),
+        radial-gradient(900px 520px at 55% 110%, rgba(255,209,102,.12), transparent 55%),
+        var(--bg);
       color:var(--text);
     }
     a{color:inherit}
@@ -102,6 +105,8 @@
     .tag.change{border-color:rgba(122,162,255,.6); color:var(--text)}
     .tag.homeo{border-color:rgba(94,234,212,.6); color:var(--text)}
     .tag.synch{border-color:rgba(255,209,102,.7); color:var(--text)}
+    .tag.iching{border-color:rgba(147,197,253,.65); color:var(--text)}
+    .tag.quantum{border-color:rgba(245,158,11,.65); color:var(--text)}
 
     .cards{
       display:grid;
@@ -109,6 +114,13 @@
       gap:12px;
     }
     @media (max-width: 860px){ .cards{grid-template-columns:1fr} }
+
+    .cards2{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+    }
+    @media (max-width: 860px){ .cards2{grid-template-columns:1fr} }
 
     .card{
       border:1px solid var(--line);
@@ -118,6 +130,7 @@
     }
     .card h3{margin:0 0 8px;font-size:14px}
     .card p{margin:0;color:var(--muted);font-size:13px;line-height:1.6}
+    .card ul{margin:0;padding-left:18px;color:var(--muted);font-size:13px;line-height:1.7}
 
     .kline{
       margin-top:10px;
@@ -130,6 +143,7 @@
       color:rgba(234,240,255,.92);
     }
     .kline b{color:#fff}
+
     .kbd{
       padding:2px 7px;
       border:1px solid var(--line);
@@ -141,10 +155,7 @@
       white-space:nowrap;
     }
 
-    .timeline{
-      display:grid;
-      gap:10px;
-    }
+    .timeline{display:grid; gap:10px;}
     .titem{
       border:1px solid var(--line);
       border-radius:16px;
@@ -211,18 +222,19 @@
     <header id="top">
       <div class="topline">
         <div class="brand">
-          <h1>🔄 공덕 선생 — 3축 자각(變化·恒常性·同時性)</h1>
+          <h1>🔄 공덕 선생 — 3축 자각 통합판 (주역↔양자↔3축)</h1>
           <p>
-            이 페이지는 “3축 자각”을 <b>정의 → 연대기(핵심 문장 TOP10) → 도해 → 실천</b> 순으로 압축 정리한 1페이지 웹문서입니다.<br/>
+            구성: <b>3축 정의</b> → <b>연대기 TOP10</b> → <b>통합 연결(주역↔양자↔3축)</b> → <b>도해 2종</b> → <b>실천</b><br/>
             중심 테제: <b>“변화와 항상성의 역설적 동시성”</b>.[^https://app.notion.com/p/c5d9f8a45c8b4e00b87cf5f41d586a6d]
           </p>
         </div>
         <nav aria-label="섹션 이동">
           <a href="#axes">3축 정의</a>
           <a href="#chronicle">연대기 TOP10</a>
-          <a href="#diagram">圖說</a>
-          <a href="#practice">실천 요약</a>
-          <a href="#ref">참조</a>
+          <a href="#bridge">주역↔양자 연결</a>
+          <a href="#diagram3axis">圖說(3축)</a>
+          <a href="#diagram3view">圖說(3대 관점)</a>
+          <a href="#practice">실천</a>
         </nav>
       </div>
 
@@ -294,9 +306,7 @@
 
             <div class="titem">
               <div class="meta">
-                <span class="year">2019</span>
-                <span>명리학사2(9~14주)</span>
-                <span style="color:rgba(234,240,255,.65)">(https://app.notion.com/p/a642ac4ed49e460dba233fdddd463000)</span>
+                <span class="year">2019</span><span>명리학사2(9~14주)</span><span style="color:rgba(234,240,255,.65)">(https://app.notion.com/p/a642ac4ed49e460dba233fdddd463000)</span>
               </div>
               <blockquote>“정격(오행의 일정한 법칙), 변격(오행의 치우침/偏勝)”</blockquote>
               <div class="cmt">변화(치우침)와 항상성(법칙)을 한 프레임에 올려, 3축 통합의 골격을 먼저 마련.</div>
@@ -304,9 +314,7 @@
 
             <div class="titem">
               <div class="meta">
-                <span class="year">2019</span>
-                <span>명리학사2(9~14주)</span>
-                <span style="color:rgba(234,240,255,.65)">(https://app.notion.com/p/a642ac4ed49e460dba233fdddd463000)</span>
+                <span class="year">2019</span><span>명리학사2(9~14주)</span><span style="color:rgba(234,240,255,.65)">(https://app.notion.com/p/a642ac4ed49e460dba233fdddd463000)</span>
               </div>
               <blockquote>“오행의 이치(변하여도 근본을 벗어나지 않는다)”</blockquote>
               <div class="cmt">변화 속 ‘근본(기준축)’의 동시 작동을 못 박음 → 동시성 정의의 씨앗.</div>
@@ -314,9 +322,7 @@
 
             <div class="titem">
               <div class="meta">
-                <span class="year">2020</span>
-                <span>사주와 질병론(1~8주)</span>
-                <span style="color:rgba(234,240,255,.65)">(https://app.notion.com/p/ecd7c409a0944872be7803f8312925b3)</span>
+                <span class="year">2020</span><span>사주와 질병론(1~8주)</span><span style="color:rgba(234,240,255,.65)">(https://app.notion.com/p/ecd7c409a0944872be7803f8312925b3)</span>
               </div>
               <blockquote>“발생·발전·변화는 음양의 대립통일의 모순운동에서 비롯”</blockquote>
               <div class="cmt">변화를 ‘현상’이 아니라 ‘원리’로 규정.</div>
@@ -324,9 +330,7 @@
 
             <div class="titem">
               <div class="meta">
-                <span class="year">2020</span>
-                <span>사주와 질병론(1~8주)</span>
-                <span style="color:rgba(234,240,255,.65)">(https://app.notion.com/p/ecd7c409a0944872be7803f8312925b3)</span>
+                <span class="year">2020</span><span>사주와 질병론(1~8주)</span><span style="color:rgba(234,240,255,.65)">(https://app.notion.com/p/ecd7c409a0944872be7803f8312925b3)</span>
               </div>
               <blockquote>“호근호용(상호의존, 음양전환의 내적근거)”</blockquote>
               <div class="cmt">동시성의 핵심을 ‘병존’이 아닌 ‘상호의존/내적근거’로 확정.</div>
@@ -334,9 +338,7 @@
 
             <div class="titem">
               <div class="meta">
-                <span class="year">2020</span>
-                <span>사주와 질병론(1~8주)</span>
-                <span style="color:rgba(234,240,255,.65)">(https://app.notion.com/p/ecd7c409a0944872be7803f8312925b3)</span>
+                <span class="year">2020</span><span>사주와 질병론(1~8주)</span><span style="color:rgba(234,240,255,.65)">(https://app.notion.com/p/ecd7c409a0944872be7803f8312925b3)</span>
               </div>
               <blockquote>“소장균형(성하고 쇠하는 상대적 균형)”</blockquote>
               <div class="cmt">항상성을 정지/고정이 아닌 ‘균형’으로 재정의 → 변화와 공존 가능.</div>
@@ -344,9 +346,7 @@
 
             <div class="titem">
               <div class="meta">
-                <span class="year">2020</span>
-                <span>사주와 질병론(1~8주)</span>
-                <span style="color:rgba(234,240,255,.65)">(https://app.notion.com/p/ecd7c409a0944872be7803f8312925b3)</span>
+                <span class="year">2020</span><span>사주와 질병론(1~8주)</span><span style="color:rgba(234,240,255,.65)">(https://app.notion.com/p/ecd7c409a0944872be7803f8312925b3)</span>
               </div>
               <blockquote>“상호전화(至極至變, 극에 이르면 변한다)”</blockquote>
               <div class="cmt">변화가 외부가 아니라 내부 극점에서 필연적으로 발생 → 변화·동시성 결속.</div>
@@ -354,9 +354,7 @@
 
             <div class="titem">
               <div class="meta">
-                <span class="year">2022</span>
-                <span>도올 주역강해</span>
-                <span style="color:rgba(234,240,255,.65)">(https://app.notion.com/p/1c0c9aa82ca74a249902342c57adaec6)</span>
+                <span class="year">2022</span><span>도올 주역강해</span><span style="color:rgba(234,240,255,.65)">(https://app.notion.com/p/1c0c9aa82ca74a249902342c57adaec6)</span>
               </div>
               <blockquote>“정(동의 가능성을 함장한 고요함)”</blockquote>
               <div class="cmt">고요(항상성)를 변화의 잠재성으로 재해석 → 분리 감각 해체.</div>
@@ -364,9 +362,7 @@
 
             <div class="titem">
               <div class="meta">
-                <span class="year">2022</span>
-                <span>도올 주역강해</span>
-                <span style="color:rgba(234,240,255,.65)">(https://app.notion.com/p/1c0c9aa82ca74a249902342c57adaec6)</span>
+                <span class="year">2022</span><span>도올 주역강해</span><span style="color:rgba(234,240,255,.65)">(https://app.notion.com/p/1c0c9aa82ca74a249902342c57adaec6)</span>
               </div>
               <blockquote>“一動一靜 … 동과 정은 서로의 뿌리”</blockquote>
               <div class="cmt">동시성이 ‘동시에 생김’이 아니라 ‘서로의 근원’임을 확정하는 결정문.</div>
@@ -374,9 +370,7 @@
 
             <div class="titem">
               <div class="meta">
-                <span class="year">2022</span>
-                <span>도올 주역강해</span>
-                <span style="color:rgba(234,240,255,.65)">(https://app.notion.com/p/1c0c9aa82ca74a249902342c57adaec6)</span>
+                <span class="year">2022</span><span>도올 주역강해</span><span style="color:rgba(234,240,255,.65)">(https://app.notion.com/p/1c0c9aa82ca74a249902342c57adaec6)</span>
               </div>
               <blockquote>“Homeostasis(恒常性) … 역동적인 평형상태”</blockquote>
               <div class="cmt">항상성의 작동방식(움직이며 유지)을 정식화 → 변화·항상성 동시 작동이 ‘방식’이 됨.</div>
@@ -384,9 +378,7 @@
 
             <div class="titem">
               <div class="meta">
-                <span class="year">2025</span>
-                <span>변화와 항상성의 역설적 동시성</span>
-                <span style="color:rgba(234,240,255,.65)">(https://app.notion.com/p/c5d9f8a45c8b4e00b87cf5f41d586a6d)</span>
+                <span class="year">2025</span><span>변화와 항상성의 역설적 동시성</span><span style="color:rgba(234,240,255,.65)">(https://app.notion.com/p/c5d9f8a45c8b4e00b87cf5f41d586a6d)</span>
               </div>
               <blockquote>“‘변화와 항상성’이라는 역설적 동시성”</blockquote>
               <div class="cmt">흩어진 언어를 하나의 테제로 응결 → 3축 자각의 최종 명명/봉합.[^https://app.notion.com/p/c5d9f8a45c8b4e00b87cf5f41d586a6d]</div>
@@ -396,44 +388,77 @@
         </div>
       </section>
 
-      <!-- 우측: 한 페이지 요약 + 링크 -->
-      <aside class="panel" id="ref">
+      <!-- 우측 요약 -->
+      <aside class="panel">
         <div class="hd">
-          <h2>요약 & 참조</h2>
+          <h2>요약(한 페이지용)</h2>
           <a href="#top" class="tag" style="text-decoration:none;">맨 위로</a>
         </div>
         <div class="bd">
           <div class="card">
             <h3>요약(3문장)</h3>
             <p>
-              1) 변화는 원리에서 나오고(대립통일/모순운동),<br/>
+              1) 변화는 원리에서 나오고,<br/>
               2) 항상성은 멈춤이 아닌 ‘동적 평형’이며,<br/>
               3) 동시성은 상호의존(서로의 뿌리)로서 두 축을 연결한다.
             </p>
           </div>
 
-          <div class="card" style="margin-top:12px">
-            <h3>참조 페이지</h3>
-            <p style="line-height:1.7;color:var(--muted);font-size:13px;margin:0">
-              • 2019: 명리학사2(9~14주) — https://app.notion.com/p/a642ac4ed49e460dba233fdddd463000<br/>
-              • 2020: 사주와 질병론(1~8주) — https://app.notion.com/p/ecd7c409a0944872be7803f8312925b3<br/>
-              • 2022: 도올 주역강해 — https://app.notion.com/p/1c0c9aa82ca74a249902342c57adaec6<br/>
-              • 2025: 변화와 항상성의 역설적 동시성 — https://app.notion.com/p/c5d9f8a45c8b4e00b87cf5f41d586a6d
-            </p>
-          </div>
-
           <div class="kline" style="margin-top:12px">
-            <b>읽는 순서(추천)</b><br/>
-            ① 2025 테제(역설적 동시성) → ② 2020(호근호용/소장균형/상호전화) → ③ 2022(동정/뿌리) → ④ 2019(법칙/변격)
+            <b>이 통합판에서 추가된 것</b><br/>
+            아래 <span class="kbd">주역↔양자 연결</span> 섹션에서, “3축”을 공통 좌표로 삼아<br/>
+            <b>주역(변역·불역·이간)</b> ↔ <b>양자(불확정성·보존/대칭·중첩/얽힘/상보성)</b>을 한 번에 매핑합니다.
           </div>
         </div>
       </aside>
     </div>
 
-    <!-- 도해 -->
-    <section class="panel" id="diagram" style="margin-top:16px">
+    <!-- NEW: Bridge section -->
+    <section class="panel" id="bridge" style="margin-top:16px">
       <div class="hd">
-        <h2>3) 圖說 — “역설적 동시성”을 한 장으로</h2>
+        <h2>3) 연결 섹션 — 주역(變易·不易·易簡) ↔ 양자역학(불확정성·대칭/보존·중첩/얽힘/상보성)</h2>
+        <div class="tagrow">
+          <span class="tag iching">주역 3대 관점</span>
+          <span class="tag change">3축(변화)</span>
+          <span class="tag homeo">3축(항상성)</span>
+          <span class="tag synch">3축(동시성)</span>
+          <span class="tag quantum">양자 3대 관점</span>
+        </div>
+      </div>
+      <div class="bd">
+        <div class="cards2">
+          <div class="card">
+            <h3 style="color:var(--cIChing)">주역: 變易 · 不易 · 易簡</h3>
+            <ul>
+              <li><b>變易</b> = 만물은 변한다 → <span class="kbd">변화축</span>의 언어</li>
+              <li><b>不易</b> = 변화 속 불변 원리 → <span class="kbd">항상성축</span>(법칙·질서)</li>
+              <li><b>易簡</b> = 복잡을 간결한 상징으로 → <span class="kbd">동시성축</span>(전체를 한 번에 파악하는 압축)</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3 style="color:var(--cQuantum)">양자: 불확정성 · 보존/대칭성 · 중첩/얽힘/상보성</h3>
+            <ul>
+              <li><b>불확정성</b> = 확률·요동·과정 → <span class="kbd">변화축</span></li>
+              <li><b>보존/대칭성</b> = 변화 속 뼈대 → <span class="kbd">항상성축</span></li>
+              <li><b>중첩/얽힘/상보성</b> = 전체 상태의 상관 → <span class="kbd">동시성축</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="kline" style="margin-top:12px">
+          <b>핵심 메시지</b><br/>
+          주역과 양자역학은 언어가 다르지만, <b>변한다(變)</b> / <b>지켜진다(恒)</b> / <b>함께 엮인다(同)</b>라는 “3축”으로 정렬하면
+          한 화면에서 비교·통합이 가능합니다. 이때 공덕 선생의 3축 자각은 “설명 도구”를 넘어,
+          실제 삶/인식에서 <b>역설적 동시성</b>을 체감하는 훈련 프레임이 됩니다.[^https://app.notion.com/p/c5d9f8a45c8b4e00b87cf5f41d586a6d]
+        </div>
+      </div>
+    </section>
+
+    <!-- Diagram 1: 3-axis awakening -->
+    <section class="panel" id="diagram3axis" style="margin-top:16px">
+      <div class="hd">
+        <h2>4) 圖說 ① — “역설적 동시성(3축)” 한 장 요약</h2>
         <div class="tagrow">
           <span class="tag change">변화</span>
           <span class="tag homeo">항상성</span>
@@ -441,7 +466,7 @@
         </div>
       </div>
       <div class="bd">
-        <div class="svgbox" aria-label="3축 자각 도해">
+        <div class="svgbox">
           <svg viewBox="0 0 980 560" width="980" height="560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="3축 자각 도해">
             <defs>
               <style>
@@ -473,7 +498,6 @@
             <text x="32" y="46" class="title">3축 자각: 변화·항상성·동시성이 “동시에” 작동한다</text>
             <text x="32" y="72" class="sub">테제: “변화와 항상성의 역설적 동시성” — 고정 실체 집착을 해체하는 자각의 시작.[^https://app.notion.com/p/c5d9f8a45c8b4e00b87cf5f41d586a6d]</text>
 
-            <!-- 3 cards top -->
             <g filter="url(#shadow)">
               <rect x="32" y="105" width="300" height="150" class="change"/>
               <text x="52" y="136" class="h">변화(變化)</text>
@@ -498,7 +522,6 @@
               <text x="668" y="220" class="tiny">‘병존’이 아니라 ‘내적근거’</text>
             </g>
 
-            <!-- bottom synthesis -->
             <g filter="url(#shadow)">
               <rect x="160" y="305" width="660" height="210" class="box"/>
               <text x="185" y="340" class="h">통합(役): 3축을 한 번에 겹쳐 보는 시야</text>
@@ -513,24 +536,133 @@
               <text x="205" y="523" class="t">③ 두 작동은 연결된다(同) — 상호의존(호근호용)이라는 내적근거로</text>
             </g>
 
-            <!-- arrows -->
             <line x1="182" y1="255" x2="310" y2="305" class="arrow"/>
             <line x1="490" y1="255" x2="490" y2="305" class="arrowg"/>
             <line x1="798" y1="255" x2="670" y2="305" class="arrow"/>
           </svg>
         </div>
-        <div class="kline">
-          <b>도해를 읽는 방법</b><br/>
-          어떤 현상을 볼 때, <b>(1) 무엇이 변하는가</b> / <b>(2) 무엇이 유지되는가</b> / <b>(3) 둘을 연결하는 내적근거(상호의존)는 무엇인가</b>
-          를 동시에 묻는 것이 “3축 자각”의 실전 질문입니다.
+      </div>
+    </section>
+
+    <!-- Diagram 2: 3-view comparison (I Ching ↔ Axes ↔ Quantum) -->
+    <section class="panel" id="diagram3view" style="margin-top:16px">
+      <div class="hd">
+        <h2>5) 圖說 ② — 3대 관점 비교(주역 ↔ 3축 ↔ 양자역학)</h2>
+        <div class="tagrow">
+          <span class="tag iching">주역</span>
+          <span class="tag change">변화</span>
+          <span class="tag homeo">항상성</span>
+          <span class="tag synch">동시성</span>
+          <span class="tag quantum">양자</span>
+        </div>
+      </div>
+      <div class="bd">
+        <div class="svgbox">
+          <!-- 3대 관점 비교 SVG -->
+          <svg viewBox="0 0 980 560" width="980" height="560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="주역·양자역학·우주 변화 3축 관계도">
+            <defs>
+              <style>
+                .title { font: 800 22px/1.2 system-ui, -apple-system, "Noto Sans KR", sans-serif; fill:#0b1020; }
+                .sub   { font: 650 14px/1.4 system-ui, -apple-system, "Noto Sans KR", sans-serif; fill:#223; }
+                .h     { font: 850 16px/1.2 system-ui, -apple-system, "Noto Sans KR", sans-serif; fill:#0b1020; }
+                .t     { font: 650 14px/1.35 system-ui, -apple-system, "Noto Sans KR", sans-serif; fill:#0b1020; }
+                .tiny  { font: 600 12px/1.3 system-ui, -apple-system, "Noto Sans KR", sans-serif; fill:#223; }
+                .box { fill:#ffffff; stroke:#1a1f2e; stroke-width:1.2; rx:14; }
+                .iching { fill:#eef4ff; stroke:#3b5bdb; stroke-width:1.4; rx:14; }
+                .quant { fill:#fff6e6; stroke:#e67700; stroke-width:1.4; rx:14; }
+                .axis { fill:#eafff4; stroke:#2f9e44; stroke-width:1.4; rx:14; }
+                .arrow { stroke:#333; stroke-width:1.6; marker-end:url(#m); }
+                .arrow2 { stroke:#2f9e44; stroke-width:2.2; marker-end:url(#m2); }
+              </style>
+              <marker id="m" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+                <path d="M0,0 L8,3 L0,6 Z" fill="#333"/>
+              </marker>
+              <marker id="m2" markerWidth="12" markerHeight="12" refX="10" refY="3.5" orient="auto">
+                <path d="M0,0 L10,3.5 L0,7 Z" fill="#2f9e44"/>
+              </marker>
+              <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+                <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000" flood-opacity="0.15"/>
+              </filter>
+            </defs>
+
+            <rect x="0" y="0" width="980" height="560" fill="#ffffff" rx="18"/>
+
+            <text x="32" y="44" class="title">주역·양자역학 ↔ 우주 변화 3축(변화·항상성·동시성)</text>
+            <text x="32" y="70" class="sub">핵심: 3축은 두 체계를 정렬하는 “공통 좌표계(役)”로 작동한다.</text>
+
+            <g filter="url(#shadow)">
+              <rect x="32" y="105" width="300" height="170" class="iching"/>
+              <text x="52" y="136" class="h">주역(周易) 3대 관점</text>
+              <text x="52" y="166" class="t">1) 變易: 만물은 변한다</text>
+              <text x="52" y="194" class="t">2) 不易: 변화 속의 불변 원리</text>
+              <text x="52" y="222" class="t">3) 易簡: 복잡을 간결한 상징으로</text>
+              <text x="52" y="248" class="tiny">→ 전체 구조를 “한 번에” 읽게 하는 압축(役)</text>
+            </g>
+
+            <g filter="url(#shadow)">
+              <rect x="648" y="105" width="300" height="170" class="quant"/>
+              <text x="668" y="136" class="h">현대물리/양자역학 3대 관점</text>
+              <text x="668" y="166" class="t">1) 불확정성: 확률·요동·과정</text>
+              <text x="668" y="194" class="t">2) 보존·대칭성: 불변 구조(뼈대)</text>
+              <text x="668" y="222" class="t">3) 중첩·얽힘·상보성: 전체 상관</text>
+              <text x="668" y="248" class="tiny">→ 분리보다 ‘전체 상태’를 먼저 기술</text>
+            </g>
+
+            <g filter="url(#shadow)">
+              <rect x="340" y="295" width="300" height="235" class="axis"/>
+              <text x="360" y="328" class="h">우주 변화 3축 (공덕 선생)</text>
+
+              <rect x="360" y="346" width="260" height="54" class="box"/>
+              <text x="380" y="378" class="t">① 변화(變化)</text>
+              <text x="500" y="378" class="tiny">전이·순환·생성/소멸</text>
+
+              <rect x="360" y="410" width="260" height="54" class="box"/>
+              <text x="380" y="442" class="t">② 항상성(恒常性)</text>
+              <text x="500" y="442" class="tiny">동적 평형·보존·대칭</text>
+
+              <rect x="360" y="474" width="260" height="54" class="box"/>
+              <text x="380" y="506" class="t">③ 동시성(同時性)</text>
+              <text x="500" y="506" class="tiny">연결·상관·의미의 공명</text>
+            </g>
+
+            <line x1="332" y1="165" x2="420" y2="373" class="arrow"/>
+            <text x="344" y="300" class="tiny">變易 → 변화</text>
+
+            <line x1="332" y1="194" x2="420" y2="437" class="arrow"/>
+            <text x="340" y="322" class="tiny">不易 → 항상성</text>
+
+            <line x1="332" y1="222" x2="420" y2="501" class="arrow"/>
+            <text x="340" y="342" class="tiny">易簡 → 동시성(전체 파악)</text>
+
+            <line x1="648" y1="165" x2="560" y2="373" class="arrow"/>
+            <text x="636" y="300" class="tiny" text-anchor="end">불확정성 → 변화</text>
+
+            <line x1="648" y1="194" x2="560" y2="437" class="arrow"/>
+            <text x="636" y="322" class="tiny" text-anchor="end">보존·대칭 → 항상성</text>
+
+            <line x1="648" y1="222" x2="560" y2="501" class="arrow"/>
+            <text x="636" y="342" class="tiny" text-anchor="end">중첩·얽힘·상보성 → 동시성</text>
+
+            <line x1="490" y1="275" x2="490" y2="295" class="arrow2"/>
+            <text x="490" y="290" class="tiny" text-anchor="middle">역(役): 두 언어(철학·과학)를 한 좌표계로 정렬</text>
+          </svg>
+        </div>
+
+        <div class="kline" style="margin-top:12px">
+          <b>이 도해를 3축 자각에 “붙이는” 방법</b><br/>
+          주역/양자의 개념을 외우는 게 아니라, 매번 사건을 볼 때<br/>
+          <span class="kbd">변화</span> 무엇이 바뀌나 →
+          <span class="kbd">항상성</span> 무엇이 유지되나 →
+          <span class="kbd">동시성</span> 무엇이 서로를 근거 짓나(상호의존?)<br/>
+          로 “읽기”를 반복하면, 개념이 <b>자각(체감)</b>으로 내려옵니다.[^https://app.notion.com/p/c5d9f8a45c8b4e00b87cf5f41d586a6d]
         </div>
       </div>
     </section>
 
-    <!-- 실천 요약 -->
+    <!-- Practice -->
     <section class="panel" id="practice" style="margin-top:16px">
       <div class="hd">
-        <h2>4) 실천 요약 — 자각을 생활로 내리는 5가지</h2>
+        <h2>6) 실천 요약 — 자각을 생활로 내리는 5가지</h2>
       </div>
       <div class="bd">
         <ul class="list">
@@ -542,7 +674,7 @@
         </ul>
 
         <div class="kline" style="margin-top:12px">
-          <b>매일 30초 점검 질문(추천)</b><br/>
+          <b>매일 30초 점검 질문</b><br/>
           오늘의 사건/감정에 대해<br/>
           • <span class="kbd">변화</span> 지금 무엇이 바뀌고 있나?<br/>
           • <span class="kbd">항상성</span> 그 와중에도 유지해야 할 균형은 무엇인가?<br/>
@@ -552,7 +684,7 @@
     </section>
 
     <footer>
-      1-page webpage · “공덕 선생 3축 자각” 정리본 (변화·항상성·동시성) <br/>
+      1-page integrated webpage · 공덕 선생 3축 자각 + 주역↔양자 매핑<br/>
       참조: https://app.notion.com/p/a642ac4ed49e460dba233fdddd463000, https://app.notion.com/p/ecd7c409a0944872be7803f8312925b3, https://app.notion.com/p/1c0c9aa82ca74a249902342c57adaec6, https://app.notion.com/p/c5d9f8a45c8b4e00b87cf5f41d586a6d
     </footer>
   </div>
