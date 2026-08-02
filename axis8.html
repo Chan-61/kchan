@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>삼축과 삼독 그리고 지행합일 — 우산의 철학</title>
+<meta name="description" content="변화·항상성·동시성의 3축 자각과 삼독(집착·분노·무지) 조절이 어떻게 지행합일로 이어지는가." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;800&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#2C2C2B;
+    --ink-2:#4a4a48;
+    --sub:#7D7A75;
+    --canvas:#FFFFFF;
+    --soft:#F9F8F7;
+    --surface:#F0EFED;
+    --border:#E6E5E3;
+    --accent:#2783DE;
+    --accent-soft:#E5F2FC;
+    --plum:#8a5a7a;
+    --plum-soft:#f4ecf1;
+    --gold:#b48a3c;
+    --gold-soft:#f8f1df;
+    --green:#46A171;
+    --green-soft:#E8F1EC;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:'Noto Sans KR','Apple SD Gothic Neo',system-ui,-apple-system,sans-serif;
+    color:var(--ink);
+    background:var(--soft);
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit}
+  .wrap{max-width:920px;margin:0 auto;padding:48px 24px 96px}
+
+  /* Top nav */
+  .topnav{
+    max-width:920px;margin:0 auto;padding:20px 24px 0;
+    display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;
+    font-size:14px;color:var(--sub);
+  }
+  .topnav a{
+    text-decoration:none;color:var(--sub);
+    padding:6px 10px;border-radius:6px;
+    transition:.2s;
+  }
+  .topnav a:hover{background:var(--surface);color:var(--ink)}
+  .topnav .home{color:var(--ink);font-weight:600}
+  .topnav .sep{opacity:.4}
+
+  /* Hero */
+  .hero{
+    text-align:center;
+    padding:56px 20px 40px;
+    border-bottom:1px solid var(--border);
+    margin-bottom:48px;
+  }
+  .hero .eyebrow{
+    display:inline-block;
+    font-family:'Noto Serif KR',serif;
+    letter-spacing:.35em;
+    color:var(--plum);
+    font-size:13px;
+    margin-bottom:14px;
+  }
+  .hero h1{
+    font-family:'Noto Serif KR',serif;
+    font-weight:800;
+    font-size:clamp(28px,4.4vw,44px);
+    line-height:1.3;
+    margin:0 0 14px;
+    letter-spacing:-.01em;
+  }
+  .hero .sub{
+    color:var(--sub);
+    font-size:16px;
+    max-width:640px;margin:0 auto;
+  }
+  .hero .quote{
+    margin:28px auto 0;
+    max-width:620px;
+    padding:18px 22px;
+    background:var(--plum-soft);
+    border-left:3px solid var(--plum);
+    font-family:'Noto Serif KR',serif;
+    color:#5a3a4d;
+    font-size:15.5px;
+    line-height:1.75;
+    text-align:left;
+    border-radius:0 8px 8px 0;
+  }
+
+  /* Section headings */
+  section{margin-bottom:56px}
+  .kicker{
+    display:inline-block;
+    font-family:'Noto Serif KR',serif;
+    font-size:28px;
+    font-weight:800;
+    color:var(--plum);
+    margin-right:14px;
+    vertical-align:baseline;
+  }
+  h2.section-title{
+    font-family:'Noto Serif KR',serif;
+    font-size:24px;
+    font-weight:700;
+    margin:0 0 6px;
+    display:inline-block;
+  }
+  .section-caption{
+    color:var(--sub);
+    font-size:14px;
+    margin:0 0 22px;
+  }
+
+  /* Cards */
+  .card{
+    background:var(--canvas);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:26px 28px;
+    box-shadow:0 1px 2px rgba(0,0,0,.03);
+  }
+  .card + .card{margin-top:16px}
+  .card h3{
+    margin:0 0 10px;
+    font-family:'Noto Serif KR',serif;
+    font-size:19px;
+    font-weight:700;
+  }
+  .card p{margin:0 0 10px;color:var(--ink-2)}
+  .card p:last-child{margin-bottom:0}
+
+  /* Three axis grid */
+  .triaxis{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:14px;
+    margin-top:18px;
+  }
+  .triaxis .cell{
+    background:var(--canvas);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:20px 18px;
+    text-align:center;
+  }
+  .triaxis .cell .han{
+    font-family:'Noto Serif KR',serif;
+    font-size:26px;font-weight:800;
+    color:var(--plum);
+    display:block;margin-bottom:6px;
+  }
+  .triaxis .cell .en{
+    font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--sub);
+    display:block;margin-bottom:10px;
+  }
+  .triaxis .cell p{margin:0;color:var(--ink-2);font-size:14.5px;line-height:1.65}
+
+  /* Three poisons */
+  .poisons{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:14px;
+    margin-top:18px;
+  }
+  .poisons .cell{
+    background:var(--gold-soft);
+    border:1px solid #ecdcb1;
+    border-radius:10px;
+    padding:20px 18px;
+  }
+  .poisons .cell h4{
+    margin:0 0 6px;
+    font-family:'Noto Serif KR',serif;
+    font-size:18px;color:#7a5a1e;
+  }
+  .poisons .cell p{margin:0;color:#5a4720;font-size:14.5px;line-height:1.65}
+
+  /* Mapping table */
+  .table-wrap{overflow-x:auto;margin-top:18px}
+  table.map{
+    width:100%;
+    border-collapse:collapse;
+    background:var(--canvas);
+    border:1px solid var(--border);
+    border-radius:10px;
+    overflow:hidden;
+    font-size:14.5px;
+  }
+  table.map th, table.map td{
+    padding:12px 14px;
+    border-bottom:1px solid var(--border);
+    text-align:left;
+    vertical-align:top;
+  }
+  table.map th{
+    background:var(--surface);
+    font-weight:600;
+    color:var(--ink);
+    font-family:'Noto Serif KR',serif;
+  }
+  table.map td:first-child{
+    width:130px;
+    font-family:'Noto Serif KR',serif;
+    font-weight:700;
+    color:var(--plum);
+  }
+  table.map tr:last-child td{border-bottom:none}
+
+  /* Umbrella metaphor */
+  .umbrella{
+    background:linear-gradient(180deg,#ffffff 0%, #f3f7fb 100%);
+    border:1px solid #dfe8f1;
+    border-radius:14px;
+    padding:30px 28px;
+    margin-top:20px;
+    position:relative;
+    overflow:hidden;
+  }
+  .umbrella svg{position:absolute;right:-20px;top:-10px;opacity:.15}
+  .umbrella h3{
+    margin:0 0 10px;
+    font-family:'Noto Serif KR',serif;
+    font-size:20px;
+  }
+  .umbrella blockquote{
+    margin:14px 0 0;
+    padding:14px 18px;
+    border-left:3px solid var(--accent);
+    background:var(--accent-soft);
+    color:#204a70;
+    font-family:'Noto Serif KR',serif;
+    font-size:15.5px;
+    line-height:1.75;
+    border-radius:0 8px 8px 0;
+  }
+
+  /* 起承轉結 blocks */
+  .flow{display:grid;grid-template-columns:1fr;gap:14px;margin-top:18px}
+  .step{
+    display:grid;
+    grid-template-columns:80px 1fr;
+    background:var(--canvas);
+    border:1px solid var(--border);
+    border-radius:12px;
+    overflow:hidden;
+  }
+  .step .badge{
+    background:var(--plum);
+    color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Noto Serif KR',serif;
+    font-size:26px;font-weight:800;
+    letter-spacing:.05em;
+  }
+  .step.승 .badge{background:#a06b8a}
+  .step.전 .badge{background:var(--gold)}
+  .step.결 .badge{background:var(--green)}
+  .step .body{padding:20px 24px}
+  .step .body h3{
+    margin:0 0 8px;
+    font-family:'Noto Serif KR',serif;
+    font-size:19px;
+  }
+  .step .body p{margin:0;color:var(--ink-2)}
+  .step .body p + p{margin-top:8px}
+
+  /* Daily checklist */
+  .checklist{
+    background:var(--green-soft);
+    border:1px solid #cfe3d7;
+    border-radius:12px;
+    padding:26px 28px;
+    margin-top:20px;
+  }
+  .checklist h3{
+    margin:0 0 14px;
+    font-family:'Noto Serif KR',serif;
+    font-size:19px;
+    color:#2f6a4b;
+  }
+  .checklist ol{margin:0;padding-left:20px;color:#2f5d47}
+  .checklist ol li{margin-bottom:8px;line-height:1.7}
+  .checklist ol li strong{color:#1f4b36}
+
+  /* Related links */
+  .related{
+    margin-top:36px;
+    padding:24px;
+    background:var(--canvas);
+    border:1px dashed var(--border);
+    border-radius:12px;
+  }
+  .related h3{
+    margin:0 0 14px;
+    font-family:'Noto Serif KR',serif;
+    font-size:17px;
+    color:var(--sub);
+    letter-spacing:.05em;
+  }
+  .related .links{display:flex;flex-wrap:wrap;gap:10px}
+  .related a{
+    text-decoration:none;
+    padding:8px 14px;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:999px;
+    font-size:14px;
+    color:var(--ink);
+    transition:.2s;
+  }
+  .related a:hover{background:var(--plum-soft);border-color:#dcc4d1;color:var(--plum)}
+
+  footer{
+    text-align:center;
+    color:var(--sub);
+    font-size:13px;
+    padding:24px 0 0;
+    border-top:1px solid var(--border);
+    margin-top:56px;
+  }
+
+  @media (max-width:640px){
+    .triaxis, .poisons{grid-template-columns:1fr}
+    .step{grid-template-columns:60px 1fr}
+    .step .badge{font-size:22px}
+    .hero{padding:36px 12px 28px}
+    .card{padding:22px 20px}
+  }
+</style>
+</head>
+<body>
+
+<nav class="topnav" aria-label="사이트 내비게이션">
+  <a class="home" href="./">← Home</a>
+  <span class="sep">·</span>
+  <a href="axis1.html">변화원리 II</a>
+  <a href="axis4">변화원리 III</a>
+  <a href="axis6">3축</a>
+  <a href="axis7">지행합일</a>
+  <a href="axis8" style="color:var(--plum);font-weight:600">삼축·삼독·지행합일</a>
+</nav>
+
+<div class="wrap">
+
+  <header class="hero">
+    <div class="eyebrow">三 軸 · 三 毒 · 知 行 合 一</div>
+    <h1>삼축과 삼독 그리고 지행합일</h1>
+    <p class="sub">— 변화·항상성·동시성으로 삼독(집착·분노·무지)을 다스려 오늘의 삶에 내리는 <b>우산의 철학</b> —</p>
+    <div class="quote">
+      비를 내리지 않게 할 수는 없지만,<br>
+      우산을 준비해 비를 덜 맞을 수는 있습니다.<br>
+      삶의 고통도 마찬가지입니다.
+    </div>
+  </header>
+
+  <!-- Section 1: 개념 정명화 -->
+  <section>
+    <div><span class="kicker">壹</span><h2 class="section-title">개념의 정명화</h2></div>
+    <p class="section-caption">3축(三軸)과 3독(三毒) — 두 축이 만나는 자리에서 자각이 시작된다.</p>
+
+    <div class="card">
+      <h3>우주의 3축 — 변화 · 항상성 · 동시성</h3>
+      <p>우주를 관통하는 구조적 원리. 변화는 <b>구조의 작동</b>이며, 항상성은 <b>변화 속에서 유지되는 균형</b>이고, 동시성은 <b>서로 다른 층위의 사건이 하나의 구조로 묶이는 방식</b>이다.</p>
+      <div class="triaxis" role="list">
+        <div class="cell" role="listitem">
+          <span class="han">變化</span>
+          <span class="en">Change</span>
+          <p>모든 존재는 정지하지 않으며, 변화 그 자체가 실재다.</p>
+        </div>
+        <div class="cell" role="listitem">
+          <span class="han">恒常</span>
+          <span class="en">Homeostasis</span>
+          <p>변화 속에서도 유지되는 구조적, 역동적 균형.</p>
+        </div>
+        <div class="cell" role="listitem">
+          <span class="han">同時</span>
+          <span class="en">Synchronicity</span>
+          <p>인과를 넘어 구조적으로 연결되는 사건들의 상호의존.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <h3>마음의 3독 — 집착 · 분노 · 무지</h3>
+      <p>삶의 고통을 증폭시키는 세 가지 마음의 뿌리. 삼독은 ‘나의 본질’이 아니라 <b>상황에 따라 일어나고 사라지는 마음의 움직임</b>이다.</p>
+      <div class="poisons" role="list">
+        <div class="cell" role="listitem">
+          <h4>집착 (執着)</h4>
+          <p>변하는 것을 변하지 않는다고 붙잡을 때 생기는 고통.</p>
+        </div>
+        <div class="cell" role="listitem">
+          <h4>분노 (瞋)</h4>
+          <p>상황이 내 뜻과 어긋날 때 즉시 반응하는 격정.</p>
+        </div>
+        <div class="cell" role="listitem">
+          <h4>무지 (痴)</h4>
+          <p>내 생각만이 옳다고 여기고 배움을 멈춘 상태.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: 3축 × 3독 매핑 -->
+  <section>
+    <div><span class="kicker">貳</span><h2 class="section-title">3축으로 3독을 다스리다</h2></div>
+    <p class="section-caption">우주의 3축은 마음의 3독을 조절하는 실제 지렛대다.</p>
+
+    <div class="table-wrap">
+      <table class="map" aria-label="3축과 3독의 대응표">
+        <thead>
+          <tr>
+            <th>3축</th>
+            <th>다스리는 삼독</th>
+            <th>자각의 문장</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>변화 (變)</td>
+            <td><b>집착</b> — 붙잡음의 해체</td>
+            <td>“지금 무엇이 변하고 있는가? 이것은 정말 변하지 않는 것인가?”</td>
+          </tr>
+          <tr>
+            <td>항상성 (恒)</td>
+            <td><b>분노</b> — 반응의 조절</td>
+            <td>“요동치는 감정 속에서도 내가 지켜야 할 중심은 무엇인가?”</td>
+          </tr>
+          <tr>
+            <td>동시성 (同)</td>
+            <td><b>무지</b> — 시야의 확장</td>
+            <td>“이 흔들림과 중심은 지금 어떻게 함께 존재하는가?”</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Section 3: 우산의 비유 -->
+  <section>
+    <div><span class="kicker">參</span><h2 class="section-title">우산의 비유</h2></div>
+    <p class="section-caption">외부는 통제할 수 없다. 그러나 대응은 준비할 수 있다.</p>
+
+    <div class="umbrella">
+      <svg width="260" height="260" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M50 15 C25 15 12 35 12 50 L88 50 C88 35 75 15 50 15 Z" fill="#2783DE"/>
+        <path d="M12 50 L50 50 L50 15 C34 16 20 30 12 50 Z" fill="#5E9FE8"/>
+        <line x1="50" y1="50" x2="50" y2="85" stroke="#2C2C2B" stroke-width="2"/>
+        <path d="M50 85 Q56 88 56 92" stroke="#2C2C2B" stroke-width="2" fill="none"/>
+      </svg>
+      <h3>우리는 비를 멈추게 할 수는 없다</h3>
+      <p>우리는 자신의 의지와 상관없이 태어났습니다. 삶에서 마주치는 사건과 감정은 예고 없이 찾아옵니다. 하지만 <b>의식이 생기고 스스로 생각한다고 느끼기 시작한 순간부터</b>, 우리는 삼독을 조절함으로써 고통에서 어느 정도 벗어날 수 있다는 사실을 깨닫게 됩니다.</p>
+      <p>비가 올 것을 예상해 미리 우산을 준비하듯, 삼독이 일어날 가능성을 3축의 자각으로 미리 살피고 삶의 태도와 행동을 조절하는 것 — 이것이 <b>‘변화·항상성·동시성 → 자각 → 지행합일’</b>의 흐름입니다.</p>
+      <blockquote>
+        비를 내리지 않게 할 수는 없지만, 우산을 준비해 비를 덜 맞을 수는 있습니다.<br>
+        삶의 고통을 완전히 없앨 수는 없더라도, 변화하는 마음을 알아차리고<br>
+        중심을 지키는 실천을 통해 고통에 휩쓸리지 않을 수 있습니다.
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- Section 4: 기승전결 -->
+  <section>
+    <div><span class="kicker">肆</span><h2 class="section-title">기승전결 — 자각에서 실천으로</h2></div>
+    <p class="section-caption">삼축과 삼독이 만나 지행합일로 흐르는 길</p>
+
+    <div class="flow">
+
+      <div class="step 기">
+        <div class="badge">起</div>
+        <div class="body">
+          <h3>변화는 피할 수 없음을 깨닫다</h3>
+          <p>세상과 마음은 고정된 실체가 아니라 끊임없이 흐르고 바뀌는 과정이다. 집착·분노·무지 역시 ‘나의 본질’이 아니라, 상황에 따라 일어나고 사라지는 마음의 움직임임을 자각한다.</p>
+          <p><b>첫 자각:</b> “왜 이런 일이 나에게?”가 아니라 “지금 무엇이 변하고 있는가?”</p>
+        </div>
+      </div>
+
+      <div class="step 승">
+        <div class="badge">承</div>
+        <div class="body">
+          <h3>변화 속에서도 중심을 세우다</h3>
+          <p>항상성은 고정된 상태가 아니라, 변화 속에서 스스로 균형을 회복하는 <b>역동적 평형</b>이다. 삼독을 완전히 없애지는 못해도, 그것에 휩쓸리지 않는 <b>마음의 우산</b>은 준비할 수 있다.</p>
+          <p>• 집착이 생기면 → 붙잡고 있는 것이 정말 변하지 않는 것인지 살핀다.<br>• 분노가 생기면 → 즉시 반응하기보다 호흡하고 거리를 둔다.<br>• 무지가 드러나면 → 내 생각만 옳다고 여기지 않고 배우고 성찰한다.</p>
+        </div>
+      </div>
+
+      <div class="step 전">
+        <div class="badge">轉</div>
+        <div class="body">
+          <h3>변화와 중심은 동시에 존재한다</h3>
+          <p>강물은 쉼 없이 흐르지만, 우리는 그것을 하나의 ‘강’으로 인식한다. 흐름이 있기에 강은 살아 있고, 그 흐름 속에서도 강의 형태는 유지된다. 이것이 <b>동시성</b>이다.</p>
+          <p>분노가 일어났다고 해서 중심까지 사라진 것은 아니다. 흔들리는 그 순간에도, 흔들림을 알아차리는 힘은 함께 있다. “나는 화가 났다”에서 멈추지 않고, <b>“지금 내 안에 화가 일어나고 있구나 — 나는 어떻게 균형을 회복할 것인가?”</b>로 전환하는 자각.</p>
+        </div>
+      </div>
+
+      <div class="step 결">
+        <div class="badge">結</div>
+        <div class="body">
+          <h3>자각을 행동으로 옮기는 지행합일</h3>
+          <p>변화·항상성·동시성을 <b>아는 것</b>은 시작일 뿐이다. 매일의 사건과 감정 속에서 <b>직접 적용할 때</b> 비로소 <b>지행합일(知行合一)</b>이 된다.</p>
+          <p>비를 없앨 수는 없어도, 우산을 준비하고 비를 덜 맞는 <b>행동</b>은 할 수 있다. 고통을 제거할 수는 없어도, 고통에 대한 <b>나의 반응과 태도</b>는 바꿀 수 있다. 이것이 오늘의 말과 행동으로 실천하는 삶이다.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Section 5: 매일의 실천 -->
+  <section>
+    <div><span class="kicker">伍</span><h2 class="section-title">매일 30초, 세 가지 점검</h2></div>
+    <p class="section-caption">앎을 오늘의 삶으로 내리는 짧은 루틴</p>
+
+    <div class="checklist">
+      <h3>🌂 오늘의 우산 준비</h3>
+      <ol>
+        <li><strong>변화</strong> — 지금 내 삶과 마음에서 무엇이 변하고 있는가?<br><span style="color:#4a7059">→ 집착을 내려놓는다.</span></li>
+        <li><strong>항상성</strong> — 이 변화 속에서도 내가 지켜야 할 중심과 균형은 무엇인가?<br><span style="color:#4a7059">→ 분노를 조절한다.</span></li>
+        <li><strong>동시성</strong> — 흔들림과 중심은 지금 어떻게 함께 존재하는가?<br><span style="color:#4a7059">→ 무지를 배움으로 전환한다.</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <div class="related">
+    <h3>이어서 읽기</h3>
+    <div class="links">
+      <a href="./">← 나의 인생 2막 사용 설명서</a>
+      <a href="axis6">3축 자각 (변화·항상성·동시성)</a>
+      <a href="axis7">주역의 실천 철학 — 지행합일</a>
+      <a href="axis1.html">변화원리 II</a>
+      <a href="axis4">변화원리 III</a>
+    </div>
+  </div>
+
+  <footer>
+    © Structural Philosophy Archive · kchan · 삼축과 삼독 그리고 지행합일
+  </footer>
+
+</div>
+</body>
+</html>
